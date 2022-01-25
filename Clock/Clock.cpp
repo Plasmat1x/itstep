@@ -14,15 +14,16 @@ static std::clock_t _s;
 static std::clock_t _e;
 static std::clock_t _r;
 
-void fill_array(int* arr, unsigned int size, int a, int b = 0);
-void bubble_sort(int* arr, unsigned int size);
-void megrge_sort(int* arr, int l, int r);
-void selection_sort(int* arr, unsigned int size);
-void array_print(int* arr, unsigned int size, int n_col = 16, int col_w = 2);
-//void runtime_clock(std::string message, std::stringstream& ss);
+static const long int buf_size = (1024 * 1024);
 
-template<typename... Args>
-void runtime_clock(std::string message, std::stringstream& ss , void (*CallBackFcn)(Args... args));
+void fill_array(int* arr, unsigned int size, int a = 256, int b = 0);
+void bubble_sort(int* arr, unsigned int size);
+void merge_sort(int* arr, int l, int r);
+bool descending(int a, int b);
+bool ascending(int a, int b);
+void selection_sort(int* arr, unsigned int size, bool (*comparsionFcn)(int, int) = nullptr);
+void array_print(int* arr, unsigned int size, int n_col, int col_w = 2);
+void runtime_clock(std::string message, std::stringstream& ss);
 
 void clock_start()
 {
@@ -33,7 +34,7 @@ void clock_end(std::string message, std::stringstream& ss)
 {
     _e = std::clock();
     _r = _e - _s;
-    ss << message << _r << " ms" << std::endl;
+    ss << std::endl << message << _r << " ms" << std::endl;
 }
 
 int main()
@@ -49,88 +50,78 @@ int main()
     // do some code
     unsigned int end_time = std::clock();
     */
+    
+    //stress test
+    //int arr[1024 * 16];
+    //int arr2[1024 * 16];
+    //int arr3[1024 * 16];
+    //int arr3[1024 * 1024]; //death -> stackoverflow -> 8 byte * 1024 * 1024
+    //                  byte kilobyte megabyte
+    int* arr3 = new int[1024 * 1024]; //death -> stackoverflow -> 4 byte * 1024 * 1024 -> transfer to array into heap
 
-    int arr[1024 * 16];
-    int arr2[1024 * 16];
+    //view test
+    //int arr[16];
+    //int arr2[16];
+    //int arr3[16];
 
     /*
-    //arr random fill
-    s_timer = std::clock();
-    for (int i = 0; i < (sizeof(arr) / sizeof(int)); i++)
     {
-        arr[i] = (rand() % 255 + 1);
-    }
-    e_timer = std::clock();
-    r_time = e_timer - s_timer;
-    ss << "fill fragment time " << r_time << " ms" << std::endl;
+        //arr
+        clock_start();
+        fill_array(arr, sizeof(arr) / sizeof(int), 256, 0);
+        clock_end("fill arr time ", ss);
 
-    //bubble sort
-    s_timer = std::clock();
-    for (int i = 0; i < (sizeof(arr) / sizeof(int)) - 1; i++)
-    {
-        for (int j = 0; j < (sizeof(arr) / sizeof(int)) - i - 1; j++)
-        {
-            if (arr[j] > arr[j + 1])
-            {
-                float tmp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = tmp;
-            }
-        }
-    }
-    e_timer = std::clock();
-    r_time = e_timer - s_timer;
-    ss << "sort fragment time " << r_time << " ms" << std::endl;
+        clock_start();
+        bubble_sort(arr, sizeof(arr) / sizeof(int));
+        clock_end("bublle sort arr time ", ss);
 
-    //arr cout;
-    s_timer = std::clock();
-    std::cout << std::hex;
-    for (int i = 0; i < (sizeof(arr) / sizeof(int)) - 1; i++)
-    {
-        for (int j = 0; j < (sizeof(arr) / sizeof(int)) - i - 1; j++)
-        {
-            if (arr[j] > arr[j + 1])
-            {
-                float tmp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = tmp;
-            }
-        }
+        clock_start();
+        std::cout << std::hex;
+        array_print(arr, sizeof(arr) / sizeof(int), 32);
+        std::cout << std::dec;
+        clock_end("print arr time ", ss);
     }
-    std::cout << std::dec;
-    e_timer = std::clock();
-    r_time = e_timer - s_timer;
-    ss << "cout fragment time " << r_time << " ms" << std::endl;
-    */
-
-    //runtime_clock(fill_array(arr, 256, 0), "fill time ", ss);
+    //*/
     /*
-    clock_start();
-    fill_array(arr, sizeof(arr) / sizeof(int), 256, 0);
-    clock_end("fill arr time ", ss);
+    {
+        //arr2
+        clock_start();
+        fill_array(arr2, sizeof(arr2) / sizeof(int), 256, 0);
+        clock_end("fill arr2 time ", ss);
 
-    clock_start();
-    fill_array(arr2, sizeof(arr) / sizeof(int), 256, 0);
-    clock_end("fill arr2 time ", ss);
+        clock_start();
+        merge_sort(arr2, 0, sizeof(arr2) / sizeof(int)-1);
+        clock_end("merge sort arr2 time ", ss);
 
-    clock_start();
-    bubble_sort(arr, sizeof(arr) / sizeof(int));
-    clock_end("bublle sort arr time ", ss);
+        clock_start();
+        std::cout << std::hex;
+        array_print(arr2, sizeof(arr2) / sizeof(int), 32);
+        std::cout << std::dec;
+        clock_end("print arr2 time ", ss);
+    }
+    //*/
+    //*
+    {
+        //arr3
+        fill_array(arr3, 1024 * 1024, 256, 0);
 
-    clock_start();
-    std::cout << std::hex;
-    array_print(arr, sizeof(arr) / sizeof(int));
-    std::cout << std::dec;
-    clock_end("print arr time ", ss);
-    */
+        clock_start();
+        //selection_sort(arr3, 1024 * 1024, ascending);
+        //bubble_sort(arr3, 1024 * 1024);
+        merge_sort(arr3, 0, ((1024 * 1024)-1));
+        clock_end("selection sort arr3 time ", ss);
 
+        std::cout << std::hex;
+        //array_print(arr3, 1024 * 1024, 64);
+        std::cout << std::dec;
 
-    runtime_clock("something", ss, fill_array);
-
+    }
+    //*/
     ss << std::endl << "programm time " << std::clock() << " ms" << std::endl;
     std::cout << ss.str() << std::endl;
 
-    //system("pause");
+    delete arr3;
+    system("pause");
     return EXIT_SUCCESS;
 }
 
@@ -162,13 +153,15 @@ void array_print(int* arr, unsigned int size, int n_col, int col_w)
 {
     for (int i = 0; i < size; )
     {
-        for (int j = 0; j < 16; j++)
+        for (int j = 0; j < n_col; j++)
         {
             std::cout << std::setw(col_w) << arr[i] << " ";
             i++;
         }
         std::cout << std::endl;
     }
+
+    std::cout << std::endl;
 }
 
 /// <summary>
@@ -192,21 +185,6 @@ void runtime_clock(std::string message, std::stringstream& ss)
     ss << message << r_time << " ms" << std::endl;
 }
 */
-
-template<typename... Args>
-void runtime_clock(std::string message, std::stringstream& ss, void (*CallBackFcn)(Args... args))
-{
-    std::clock_t s_timer;
-    std::clock_t e_timer;
-    std::clock_t r_time;
-    s_timer = std::clock();
-
-    //CallBackFcn(...(args));
-
-    e_timer = std::clock();
-    r_time = e_timer - s_timer;
-    ss << message << r_time << " ms" << std::endl;
-}
 
 /*
 //callback ref
@@ -238,7 +216,7 @@ int main()
 }
 */
 
-void megrge_sort(int* arr, int l, int r)
+void merge_sort(int* arr, int l, int r)
 {
     /*usability
     int main() 
@@ -271,9 +249,9 @@ void megrge_sort(int* arr, int l, int r)
 
     int m = (r + l) / 2;
 
-    megrge_sort(arr, l, m);
-    megrge_sort(arr, m + 1, r);
-    int buf[256];
+    merge_sort(arr, l, m);
+    merge_sort(arr, m + 1, r);
+    int* buf = new int[buf_size]();
     int xl = l;
     int xr = m + 1;
     int cur = 0;
@@ -290,9 +268,31 @@ void megrge_sort(int* arr, int l, int r)
     }
     for (int i = 0; i < cur; i++)
         arr[i + l] = buf[i];
+
+    delete buf;
 }
 
-void selection_sort(int* arr, unsigned int size)
+bool ascending(int a, int b)
 {
+    return a > b;
+}
 
+bool descending(int a, int b)
+{
+    return a < b;
+}
+
+void selection_sort(int* arr, unsigned int size, bool (*comparsionFcn)(int, int))
+{
+    for (int startIndex = 0; startIndex < size; ++startIndex)
+    {
+        int bestIndex = startIndex;
+
+        for (int currentIndex = startIndex + 1; currentIndex < size; ++currentIndex)
+        {
+            if (comparsionFcn(arr[bestIndex], arr[currentIndex]))
+                bestIndex = currentIndex;
+        }
+        std::swap(arr[startIndex], arr[bestIndex]);
+    }
 }
