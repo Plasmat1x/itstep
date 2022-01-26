@@ -1,0 +1,6 @@
+
+
+selection sort arr3 time 177164 ms
+
+programm time 211835 ms
+

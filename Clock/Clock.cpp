@@ -7,14 +7,19 @@
 #include <sstream>
 #include <algorithm>
 #include <utility>
+#include <fstream>
+
+unsigned int size_ = 256 * 1024;
 
 static std::stringstream ss;
+static std::stringstream ss_array;
+static std::fstream file_out;
 
 static std::clock_t _s;
 static std::clock_t _e;
 static std::clock_t _r;
 
-static const long int buf_size = (1024 * 1024);
+static const long int buf_size = size_;
 
 void fill_array(int* arr, unsigned int size, int a = 256, int b = 0);
 void bubble_sort(int* arr, unsigned int size);
@@ -23,6 +28,7 @@ bool descending(int a, int b);
 bool ascending(int a, int b);
 void selection_sort(int* arr, unsigned int size, bool (*comparsionFcn)(int, int) = nullptr);
 void array_print(int* arr, unsigned int size, int n_col, int col_w = 2);
+void array_print_infile(int* arr, unsigned int size, int n_col, int col_w = 2);
 void runtime_clock(std::string message, std::stringstream& ss);
 
 void clock_start()
@@ -57,8 +63,7 @@ int main()
     //int arr3[1024 * 16];
     //int arr3[1024 * 1024]; //death -> stackoverflow -> 8 byte * 1024 * 1024
     //                  byte kilobyte megabyte
-    int* arr3 = new int[1024 * 1024]; //death -> stackoverflow -> 4 byte * 1024 * 1024 -> transfer to array into heap
-
+    int* arr3 = new int[size_]; //death -> stackoverflow -> 4 byte * 1024 * 1024 -> transfer to array into heap-+
     //view test
     //int arr[16];
     //int arr2[16];
@@ -103,25 +108,35 @@ int main()
     //*
     {
         //arr3
-        fill_array(arr3, 1024 * 1024, 256, 0);
+        fill_array(arr3, size_, 256, 0);
 
         clock_start();
-        //selection_sort(arr3, 1024 * 1024, ascending);
-        //bubble_sort(arr3, 1024 * 1024);
-        merge_sort(arr3, 0, ((1024 * 1024)-1));
+        //selection_sort(arr3, size_, ascending);
+        //bubble_sort(arr3, size_);
+        merge_sort(arr3, 0, (size_-1));
         clock_end("selection sort arr3 time ", ss);
 
+        
+        /*
+        file_out.open("output.txt", std::ios::out);
+        ss_array << std::hex;
+        array_print_infile(arr3, size_, 64);
+        ss_array << std::dec;
+        */
+
         std::cout << std::hex;
-        //array_print(arr3, 1024 * 1024, 64);
+        array_print(arr3, size_, 64);
         std::cout << std::dec;
 
     }
     //*/
     ss << std::endl << "programm time " << std::clock() << " ms" << std::endl;
     std::cout << ss.str() << std::endl;
-
+    //file_out << ss_array.str() << std::endl;
+    //file_out << ss.str() << std::endl;
+    //file_out.close();
     delete arr3;
-    system("pause");
+    //system("pause");
     return EXIT_SUCCESS;
 }
 
@@ -164,6 +179,21 @@ void array_print(int* arr, unsigned int size, int n_col, int col_w)
     std::cout << std::endl;
 }
 
+void array_print_infile(int* arr, unsigned int size, int n_col, int col_w)
+{
+    for (int i = 0; i < size; )
+    {
+        for (int j = 0; j < n_col; j++)
+        {
+            ss_array << std::setw(col_w) << arr[i] << " ";
+            i++;
+        }
+        ss_array << std::endl;
+    }
+
+    ss_array << std::endl;
+}
+
 /// <summary>
 /// функция для расчета времени выполнения функции переданной в качестве параметра
 /// </summary>
@@ -184,7 +214,7 @@ void runtime_clock(std::string message, std::stringstream& ss)
     r_time = e_timer - s_timer;
     ss << message << r_time << " ms" << std::endl;
 }
-*/
+//*/
 
 /*
 //callback ref
