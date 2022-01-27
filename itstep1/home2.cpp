@@ -8,7 +8,7 @@ void moneySepFromFloat(const float& sum);
 void daysToWeeks(const int& days);
 void calcRuningSpeed(const int& dist, const float& time);
 
-int main6(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
     /*
     “Написать программу вычисления площади круга и длины окружности, 

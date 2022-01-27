@@ -19,13 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\itstep3\discount.cpp" />
+    <ClCompile Include="..\itstep3\Source.cpp" />
+    <ClCompile Include="..\itstep3\Source1.cpp" />
     <ClCompile Include="1.cpp" />
     <ClCompile Include="2.cpp" />
-    <ClCompile Include="home1.cpp" />
-    <ClCompile Include="home2.cpp" />
-    <ClCompile Include="home3.cpp" />
     <ClCompile Include="itstep1.cpp" />
-    <ClCompile Include="itstep2.cpp" />
     <ClCompile Include="itstep3.cpp" />
     <ClCompile Include="logical.cpp" />
   </ItemGroup>
@@ -35,6 +34,7 @@
     <ProjectGuid>{348cf416-5f5d-48e3-a832-06b07b89a815}</ProjectGuid>
     <RootNamespace>itstep1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>labs</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

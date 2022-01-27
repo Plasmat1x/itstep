@@ -157,7 +157,7 @@ void calc2()
             break;
         case '*': //умножение на b
             std::cout << "enter number: "; std::cin >> b;
-            a *= b;чм
+            a *= b;
             std::cout << a << std::endl;
             break;
         case '/': //деление на b

@@ -7,7 +7,7 @@
 
 //using namespace std;
 
-int main5(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
     //setlocale(LC_ALL, "rus");
     system("chcp 1251"); //аналог setlocale (на время лекции для вывода кирилицы)

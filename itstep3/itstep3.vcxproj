@@ -19,7 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\itstep1\home1.cpp" />
+    <ClCompile Include="..\itstep1\home2.cpp" />
+    <ClCompile Include="..\itstep1\home3.cpp" />
+    <ClCompile Include="..\itstep1\itstep2.cpp" />
+    <ClCompile Include="homework.cpp" />
     <ClCompile Include="homework2.cpp" />
+    <ClCompile Include="house.cpp" />
+    <ClCompile Include="itstep3.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -27,6 +34,7 @@
     <ProjectGuid>{ed3ae177-69c3-458e-a870-af497e60b4ea}</ProjectGuid>
     <RootNamespace>itstep3</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>home</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

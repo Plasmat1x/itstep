@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <cmath>
 
-int main3(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
     //homework
 

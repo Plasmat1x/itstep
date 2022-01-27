@@ -8,7 +8,7 @@
 /// <param name="argc">integer param</param>
 /// <param name="argv">char array param</param>
 /// <returns>integer: 0 - good, 1..n - bad</returns>
-int main4(int argc, char* argv[]) //начало программы
+int main(int argc, char* argv[]) //начало программы
 {
     //setlocale(LC_ALL, "rus");
     //ctrl+k,ctrl+c - установка многострочного комментария

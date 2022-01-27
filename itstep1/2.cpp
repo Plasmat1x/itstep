@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <locale>
 
-int main2(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
     setlocale(LC_ALL, "windows-1256");
 

@@ -5,16 +5,18 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MVC", "itstep\itstep.vcxproj", "{61AFC6F2-B57F-4339-9254-CD315D030E63}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "itstep1", "itstep1\itstep1.vcxproj", "{348CF416-5F5D-48E3-A832-06B07B89A815}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "labs", "itstep1\itstep1.vcxproj", "{348CF416-5F5D-48E3-A832-06B07B89A815}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestZone", "TestZone\TestZone.vcxproj", "{CC61430F-C95D-45FD-87FC-571CAD4A5B8A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "factorial", "TestZone\TestZone.vcxproj", "{CC61430F-C95D-45FD-87FC-571CAD4A5B8A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "itstep3", "itstep3\itstep3.vcxproj", "{ED3AE177-69C3-458E-A870-AF497E60B4EA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "home", "itstep3\itstep3.vcxproj", "{ED3AE177-69C3-458E-A870-AF497E60B4EA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D32AD240-FD13-4351-9B62-C379D94D03EE}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		other.txt = other.txt
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Clock", "Clock\Clock.vcxproj", "{72B7414A-8060-412F-814B-24AB5E9BD1F2}"
