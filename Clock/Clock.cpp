@@ -10,9 +10,9 @@
 #include <utility>
 #include <fstream>
 
-unsigned int size_ = 1024 * 1024; //you can change size;
+unsigned int size_ = 1024; //you can change size;
 
-static const long int buf_size = size_;
+static const int buf_size = size_;
 
 void fill_array(int* arr, unsigned int size, int a = 256, int b = 0);
 
@@ -60,7 +60,7 @@ int main()
 R"(
 Меню:
     1 - Сортировка пузырьком
-    2 - Сортировка слиянием (!результат сортировки с ошибкой, на само выполнение не влияет)
+    2 - Сортировка слиянием
     3 - Сортировка выборкой
     0 - Выход
 )" << std::endl;
@@ -144,7 +144,7 @@ R"(
         system("cls");
 
         arrss << std::hex;
-        array_print_infile(arrss, arr, size_, 16, 2);
+        array_print_infile(arrss, arr, (int)size_, 16, 2);
         arrss << std::dec;
         ss << std::endl << "время выполнения программы " << std::clock() << " ms" << std::endl;
         
@@ -169,7 +169,7 @@ R"(
 
 void fill_array(int* arr, unsigned int size, int a, int b)
 {
-    for (int i = 0; i < size; i++)
+    for (unsigned int i = 0; i < size; i++)
     {
         arr[i] = (rand() % a) + b;
     }
@@ -177,13 +177,13 @@ void fill_array(int* arr, unsigned int size, int a, int b)
 
 void bubble_sort(int* arr, unsigned int size)
 {
-    for (int i = 0; i < size - 1; i++)
+    for (unsigned int i = 0; i < size - 1; i++)
     {
-        for (int j = 0; j < size - i - 1; j++)
+        for (unsigned int j = 0; j < size - i - 1; j++)
         {
             if (arr[j] > arr[j + 1])
             {
-                float tmp = arr[j];
+                int tmp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = tmp;
             }
@@ -193,7 +193,7 @@ void bubble_sort(int* arr, unsigned int size)
 
 void array_print(std::stringstream& ss, int* arr, unsigned int size, int n_col, int col_w)
 {
-    for (int i = 0; i < size; )
+    for (unsigned int i = 0; i < size; )
     {
         for (int j = 0; j < n_col; j++)
         {
@@ -208,7 +208,7 @@ void array_print(std::stringstream& ss, int* arr, unsigned int size, int n_col, 
 
 void array_print_infile(std::stringstream& ss, int* arr, unsigned int size, int n_col, int col_w)
 {
-    for (int i = 0; i < size; )
+    for (unsigned int i = 0; i < size; )
     {
         for (int j = 0; j < n_col; j++)
         {
@@ -291,21 +291,34 @@ void merge_sort(int* arr, int l, int r)
     if (r - l == 1) 
     {
         if (arr[r] < arr[l])
-            std::swap(r, l);
+            std::swap(arr[r], arr[l]);
         return;
     }
+
+   
 
     int m = (r + l) / 2;
 
     merge_sort(arr, l, m);
     merge_sort(arr, m + 1, r);
-    int* buf = new int[buf_size]();
+
+    int* buf = new int[buf_size];
     int xl = l;
     int xr = m + 1;
     int cur = 0;
 
     while (r - l + 1 != cur)
     {
+        /*
+        if (xl > m)
+            buf[cur++] = a[xr++];
+        else if (xr > r)
+            buf[cur++] = a[xl++];
+        else if (a[xl] > a[xr])
+            buf[cur++] = a[xr++];
+        else buf[cur++] = a[xl++];
+        */
+
         if (xl > m)
             buf[cur++] = arr[xr++];
         else if (xr > r)
@@ -333,11 +346,11 @@ bool descending(int a, int b)
 
 void selection_sort(int* arr, unsigned int size, bool (*comparsionFcn)(int, int))
 {
-    for (int startIndex = 0; startIndex < size; ++startIndex)
+    for (unsigned int startIndex = 0; startIndex < size; ++startIndex)
     {
         int bestIndex = startIndex;
 
-        for (int currentIndex = startIndex + 1; currentIndex < size; ++currentIndex)
+        for (unsigned int currentIndex = startIndex + 1; currentIndex < size; ++currentIndex)
         {
             if (comparsionFcn(arr[bestIndex], arr[currentIndex]))
                 bestIndex = currentIndex;
