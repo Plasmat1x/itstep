@@ -9,7 +9,6 @@
     <ClCompile Include="homework2.cpp" />
     <ClCompile Include="house.cpp" />
     <ClCompile Include="itstep2.cpp" />
-    <ClCompile Include="Source.cpp" />
-    <ClCompile Include="Source1.cpp" />
+    <ClCompile Include="itstep3.cpp" />
   </ItemGroup>
 </Project>

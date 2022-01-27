@@ -24,7 +24,6 @@
     <ClCompile Include="discount.cpp" />
     <ClCompile Include="ifelse.cpp" />
     <ClCompile Include="itstep1.cpp" />
-    <ClCompile Include="itstep3.cpp" />
     <ClCompile Include="itstep3lab.cpp" />
     <ClCompile Include="logical.cpp" />
     <ClCompile Include="Source.cpp" />
