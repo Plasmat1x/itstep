@@ -19,14 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\itstep1\home1.cpp" />
-    <ClCompile Include="..\itstep1\home2.cpp" />
-    <ClCompile Include="..\itstep1\home3.cpp" />
-    <ClCompile Include="..\itstep1\itstep2.cpp" />
+    <ClCompile Include="discount.cpp" />
+    <ClCompile Include="home1.cpp" />
+    <ClCompile Include="home2.cpp" />
+    <ClCompile Include="home3.cpp" />
     <ClCompile Include="homework.cpp" />
     <ClCompile Include="homework2.cpp" />
     <ClCompile Include="house.cpp" />
-    <ClCompile Include="itstep3.cpp" />
+    <ClCompile Include="itstep2.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Source1.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TestZone.cpp">
+    <ClCompile Include="factorial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

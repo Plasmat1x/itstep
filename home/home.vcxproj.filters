@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="discount.cpp" />
+    <ClCompile Include="home1.cpp" />
+    <ClCompile Include="home2.cpp" />
+    <ClCompile Include="home3.cpp" />
+    <ClCompile Include="homework.cpp" />
+    <ClCompile Include="homework2.cpp" />
+    <ClCompile Include="house.cpp" />
+    <ClCompile Include="itstep2.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Source1.cpp" />
+  </ItemGroup>
+</Project>
