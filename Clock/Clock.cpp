@@ -77,7 +77,7 @@ R"(
     switch (menu_state)
     {
     case 0:
-        delete arr;
+        delete[] arr;
         return EXIT_SUCCESS;
     case 1: // bubble sort
     {
@@ -163,7 +163,7 @@ R"(
     system("chcp 866");
     system("cls");
 
-    delete arr;
+    delete[] arr;
     return EXIT_SUCCESS;
 }
 
@@ -317,7 +317,7 @@ void merge_sort(int* arr, int l, int r)
     for (int i = 0; i < cur; i++)
         arr[i + l] = buf[i];
 
-    delete buf;
+    delete[] buf;
 }
 
 bool ascending(int a, int b)
