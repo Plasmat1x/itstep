@@ -232,6 +232,7 @@ void runtime_clock(int* arr, unsigned int size, std::stringstream& ss, void (*Ca
 
     e_timer = std::clock();
     r_time = e_timer - s_timer;
+    ss << "Сортировка пузырьком " << r_time << " ms" << std::endl;
 
 }
 
