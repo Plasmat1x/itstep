@@ -309,16 +309,6 @@ void merge_sort(int* arr, int l, int r)
 
     while (r - l + 1 != cur)
     {
-        /*
-        if (xl > m)
-            buf[cur++] = a[xr++];
-        else if (xr > r)
-            buf[cur++] = a[xl++];
-        else if (a[xl] > a[xr])
-            buf[cur++] = a[xr++];
-        else buf[cur++] = a[xl++];
-        */
-
         if (xl > m)
             buf[cur++] = arr[xr++];
         else if (xr > r)
