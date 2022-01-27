@@ -10,9 +10,9 @@
 #include <utility>
 #include <fstream>
 
-unsigned int size_ = 1024; //you can change size;
+unsigned int size_ = 1024 * 1024; //you can change size;
 
-static const int buf_size = size_;
+static int buf_size = size_;
 
 void fill_array(int* arr, unsigned int size, int a = 256, int b = 0);
 
