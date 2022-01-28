@@ -9,8 +9,11 @@
 #include <algorithm>
 #include <utility>
 #include <fstream>
+#include <thread>
 
-unsigned int size_ = 1024 * 1024; //you can change size;
+unsigned int size_ = 1024; //you can change size;
+unsigned int size_byte = size_ * sizeof(int);
+unsigned int size_hepify = size_byte / sizeof(int);
 
 static int buf_size = size_;
 
@@ -26,6 +29,13 @@ void selection_sort(int* arr, unsigned int size, bool (*comparsionFcn)(int, int)
 
 void array_print(std::stringstream& ss, int* arr, unsigned int size, int n_col, int col_w = 2);
 void array_print_infile(std::stringstream& ss, int* arr, unsigned int size, int n_col, int col_w = 2);
+
+void heapify(int* arr, int n, int i);
+void heap_sort(int* arr, unsigned int n);
+
+void quick_sort(int* arr, int l, int r);
+
+void insert_sort(int* arr, unsigned int n);
 
 void runtime_clock(int* arr, unsigned int size, std::stringstream& ss, void (*CallbackFcn)(int*, unsigned int));
 void runtime_clock(int* arr, int l, int r, std::stringstream& ss, void (*CallbackFcn)(int*, int, int));
@@ -56,12 +66,22 @@ int main()
 
     std::cout << "<-- Провека времени работы алгоритмов -->" << std::endl;
     std::cout << "Размер массива: " << size_ * 4 << " байтов | количество элементов массива: " << size_ << std::endl;
+    std::cout << "Доступно потоков: " << std::thread::hardware_concurrency() << std::endl;
     std::cout << 
 R"(
 Меню:
-    1 - Сортировка пузырьком
-    2 - Сортировка слиянием
-    3 - Сортировка выборкой
+                                     ====================================================================
+                                     |Временная сложность                      | Вспомогательные данные |
+                                     ====================================================================
+    1 - Сортировка пузырьком.        | O(n)        | O(n^2)      | O(n^2)      | O(1)                   |
+    2 - Сортировка слиянием.         | O(n log(n)) | O(n log(n)) | O(n log(n)) | O(n)                   |
+    3 - Сортировка выборкой.         | O(n^2)      | O(n^2)      | O(n^2)      | O(1)                   |
+    4 - Сортировка быстрая           | O(n^2)      | O(n^2)      | O(n^2)      | O(1)                   |
+    5 - Сортировка пирамидальная     | O(n log(n)) | O(n log(n)) | O(n log(n)) | O(1)                   |
+    6 - Сортировка вставками         | O(n)        | O(n^2)      | O(n^2)      | O(1)                   |
+    ! - Сортировка блочная           | O(n+k)      | O(n+k)      | O(n^2)      | O(nk)                  |
+    ! - Сортировка поразрядная       | O(nk)       | O(nk)       | O(nk)       | O(n+k)                 |
+                                     ====================================================================
     0 - Выход
 )" << std::endl;
 
@@ -108,6 +128,23 @@ R"(
 
         break;
     }
+    case 4: // quick sort
+    {
+        runtime_clock(arr, 0, size_ - 1, ss, quick_sort);
+        break;
+    }
+        
+    case 5: // heap sort
+    {
+        runtime_clock(arr, size_hepify, ss, heap_sort);
+        break;
+    }
+    case 6: //insertion sort
+    {
+        runtime_clock(arr, size_, ss, insert_sort);
+        break;
+    }
+
     default: break;
     }
 
@@ -165,6 +202,72 @@ R"(
 
     delete[] arr;
     return EXIT_SUCCESS;
+}
+
+void insert_sort(int* arr, unsigned int n)
+{
+    for (int i = 0; i < (int)n; i++)
+        for (int j = i; j > 0 && arr[j - 1] > arr[j]; j--)
+        {
+            std::swap(arr[j - 1], arr[j]);
+        }
+}
+
+void quick_sort(int* arr, int l, int r)
+{
+    int i = l;
+    int j = r;
+    int p = arr[(l+r)/2];
+
+    while (i <= j)
+    {
+        while (arr[i] < p) i++;
+        while (arr[j] > p) j--;
+
+        if (i <= j)
+        {
+            if (arr[i] > arr[j])
+            {
+                std::swap(arr[i], arr[j]);
+            }
+            i++; j--;
+        }
+    }
+
+    if (l < j) quick_sort(arr, l, j);
+    if (i < r) quick_sort(arr, i, r);
+}
+
+void heapify(int* arr, int n, int i)
+{
+    int largest = i;
+    int l = 2 * i + 1;
+    int r = 2 * i + 2;
+
+    if (l < n && arr[l] > arr[largest])
+        largest = l;
+    if (r < n && arr[r] > arr[largest])
+        largest = r;
+    if (largest != i)
+    {
+        std::swap(arr[i], arr[largest]);
+
+        heapify(arr, n, largest);
+    }
+
+}
+
+void heap_sort(int* arr, unsigned int n)
+{
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        std::swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+
 }
 
 void fill_array(int* arr, unsigned int size, int a, int b)

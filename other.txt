@@ -1,5 +1,5 @@
-    /*
-    //полезная вещица
+п»ї    /*
+    //РїРѕР»РµР·РЅР°СЏ РІРµС‰РёС†Р°
     std::string something, something2;
 
     cout << "                 Please Login With Admin Credentials!" << endl;
@@ -26,3 +26,11 @@
     ASCII + Cyrilic  - 1251
     DOS + Cyrilic - 866
     UTF8 Unicode - 65001
+
+    //xВІ -> n = ВІ
+    for (i = 0; i < n; i ++)
+        x *= x;
+
+    
+    // ВІв€љx -> n = ВІ
+    x^(1/n)
