@@ -8,7 +8,10 @@ void h_w4_t1();
 
 int main()
 {
+    system("chcp 1251");
+    system("cls");
     h_w4_t1();
+    system("chcp 866");
     return 0;
 }
 
@@ -66,19 +69,19 @@ void h_w4_t1()
     int drink_type = 0;
 
     int drink_count = 0;            //переменная подсчета всех напитков
-    float drink_sum = 0;            //переменная подсчета всей суммы напитков
+    float drink_sum = 0.f;            //переменная подсчета всей суммы напитков
     float drink_discount = 0.15f;   //скидка на напитки
 
     int pizza_count = 0;            //переменная подсчета всех пицц
     int free_obtained = 0;          //переменная подсчета уже полученных бесплатных пицц
-    float pizza_sum = 0;            //сумма пицц
+    float pizza_sum = 0.f;            //сумма пицц
 
     float total_discount = 0.20f;   //скидка на весь чек
 
     int add = 0;                    //переменная для подсчета добавочной пиццы
-    float _pizza_sum = 0;           //переменная для подсчета суммы внутри одной позиции
-    float _drink_sum = 0;           //аналогично
-    float total_sum = 0;            //общая сумма
+    float _pizza_sum = 0.f;           //переменная для подсчета суммы внутри одной позиции
+    float _drink_sum = 0.f;           //аналогично
+    float total_sum = 0.f;            //общая сумма
     int _count = 0;                 //вводимое кол-во продукта
 
     std::cout << "<-Пиццерия->" << std::endl;
@@ -117,14 +120,17 @@ void h_w4_t1()
         {
             std::cout << "Введите количество продукта: "; std::cin >> _count;
             pizza_count += _count;
-            _pizza_sum = 4.49 * _count;
-            os << "\nПеперрони:\t\t$4.49\n"
+            _pizza_sum = 4.99f * _count;
+            os << "\nПеперрони:\t\t$4.99\n"
                 << "\t\t\tx" << _count << std::endl;
             add = pizza_count / 5 - free_obtained;
             free_obtained = pizza_count / 5;
-            _pizza_sum -= add * 4.49;
+            if (add > 0)
+            {
+                _pizza_sum -= add * 4.99f;
+                os << "free pizza\t\tx" << add << std::endl;
+            }
             os << "\t\t\t$" << _pizza_sum << std::endl;
-            os << "free pizza\t\tx" << add << std::endl;
             pizza_sum += _pizza_sum;
             break;
         }
@@ -132,14 +138,17 @@ void h_w4_t1()
         {
             std::cout << "Введите количество продукта: "; std::cin >> _count;
             pizza_count += _count;
-            _pizza_sum = 3.45 * _count;
+            _pizza_sum = 3.45f * _count;
             os << "\nГавайская:\t\t$3.45\n"
                 << "\t\t\tx" << _count << std::endl;
             add = pizza_count / 5 - free_obtained;
             free_obtained = pizza_count / 5;
-            _pizza_sum -= add * 3.45;
+            if (add > 0)
+            {
+                _pizza_sum -= add * 3.45f;
+                os << "free pizza\t\tx" << add << std::endl;
+            }
             os << "\t\t\t$" << _pizza_sum << std::endl;
-            os << "free pizza\t\tx" << add << std::endl;
             pizza_sum += _pizza_sum;
             break;
         }
@@ -147,14 +156,17 @@ void h_w4_t1()
         {
             std::cout << "Введите количество продукта: "; std::cin >> _count;
             pizza_count += _count;
-            _pizza_sum = 2.86 * _count;
+            _pizza_sum = 2.86f * _count;
             os << "\nЧетыре сыра:\t\t$2.86\n"
                 << "\t\t\tx" << _count << std::endl;
             add = pizza_count / 5 - free_obtained;
             free_obtained = pizza_count / 5;
-            _pizza_sum -= add * 2.86;
+            if (add > 0)
+            {
+                _pizza_sum -= add * 2.86f;
+                os << "free pizza\t\tx" << add << std::endl;
+            }
             os << "\t\t\t$" << _pizza_sum << std::endl;
-            os << "free pizza\t\tx" << add << std::endl;
             pizza_sum += _pizza_sum;
             break;
         }
@@ -162,14 +174,17 @@ void h_w4_t1()
         {
             std::cout << "Введите количество продукта: "; std::cin >> _count;
             pizza_count += _count;
-            _pizza_sum = 4.45 * _count;
+            _pizza_sum = 4.45f * _count;
             os << "\nМаргарита:\t\t$4.45\n"
                 << "\t\t\tx" << _count << std::endl;
             add = pizza_count / 5 - free_obtained;
             free_obtained = pizza_count / 5;
-            _pizza_sum -= add * 4.45;
+            if (add > 0)
+            {
+                _pizza_sum -= add * 4.45f;
+                os << "free pizza\t\tx" << add << std::endl;
+            }
             os << "\t\t\t$" << _pizza_sum << std::endl;
-            os << "free pizza\t\tx" << add << std::endl;
             pizza_sum += _pizza_sum;
             break;
         }
@@ -203,7 +218,7 @@ void h_w4_t1()
         {
             std::cout << "Введите количество продукта: "; std::cin >> _count;
             drink_count += _count;
-            _drink_sum = 0.99 * _count;
+            _drink_sum = 0.99f * _count;
             os << "\nКола:\t\t\t$0.99\n"
                 << "\t\t\tx" << _count << std::endl;
             os << "\t\t\t$" << _drink_sum << std::endl;
@@ -214,7 +229,7 @@ void h_w4_t1()
         {
             std::cout << "Введите количество продукта: "; std::cin >> _count;
             drink_count += _count;
-            _drink_sum = 2.35 * _count;
+            _drink_sum = 2.35f * _count;
             os << "\nСок:\t\t\t$2.35\n"
                 << "\t\t\tx" << _count << std::endl;
             os << "\t\t\t$" << _drink_sum << std::endl;
@@ -226,7 +241,7 @@ void h_w4_t1()
         {
             std::cout << "Введите количество продукта: "; std::cin >> _count;
             drink_count += _count;
-            _drink_sum = 0.4 * _count;
+            _drink_sum = 0.4f * _count;
             os << "\nЧай:\t\t\t$0.4\n"
                 << "\t\t\tx" << _count << std::endl;
             os << "\t\t\t$" << _drink_sum << std::endl;
@@ -243,7 +258,7 @@ void h_w4_t1()
     }
 
     //проверка на скидку для напитков + вычисление суммы напитков с учетом скидки
-    if (drink_count > 3 && drink_sum > 2.0)
+    if (drink_count > 3 && drink_sum > 2.0f)
     {
         drink_sum *= (1.0f - drink_discount);
         os << "Скидка на напитки 15%" << std::endl;

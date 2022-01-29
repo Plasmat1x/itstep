@@ -27,31 +27,31 @@ int main()
     system("cls");
 
     //regioncode();
-    system("pause");
+    //system("pause");
 
-    system("cls");
+    //system("cls");
     //factorial();
-    system("pause");
+    //system("pause");
 
-    system("cls");
+    //system("cls");
     //shape_out();
-    system("pause");
+    //system("pause");
 
-    system("cls");
+    //system("cls");
     //color_shape_out();
-    system("pause");
+    //system("pause");
     
-    system("cls");
+    //system("cls");
     //half_year_income();
-    system("pause");
+    //system("pause");
 
-    system("cls");
+    //system("cls");
     //revers_print();
-    system("pause");
+    //system("pause");
 
-    system("cls");
+    //system("cls");
     //pentagram_border_lenght();
-    system("pause");
+    //system("pause");
 
     system("cls");
     year_min_max_income();
@@ -385,7 +385,7 @@ void year_min_max_income()
 
     for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
     {
-        std::cout << "Enter income in month " << i + 1 << " "; std::cin >> arr[i];
+        std::cout << "Enter income in month " << i + 1 << " $"; std::cin >> arr[i];
 
         if (i == 0)
         {
@@ -393,8 +393,8 @@ void year_min_max_income()
             max = arr[i];
         }
 
-        if (arr[i] > max) { max = arr[i]; m_max = i; }
-        if (arr[i] < min) { min = arr[i]; m_min = i; }
+        if (arr[i] > max) { max = arr[i]; m_max = i+1; }
+        if (arr[i] < min) { min = arr[i]; m_min = i+1; }
     }
 
     std::cout << "Max income was in " << m_max << " month with $" << max << std::endl;
