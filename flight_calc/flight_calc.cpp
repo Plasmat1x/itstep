@@ -58,6 +58,8 @@ void h_w4_t4()
         fuel_usage = 4;
     else if (w > 1000 && w <= 1500)
         fuel_usage = 7;
+    else if (w > 1500 && w <= 2000)
+        fuel_usage = 9;
     else
     {
         fuel_usage = err_code;

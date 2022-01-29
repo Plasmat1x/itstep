@@ -14,8 +14,8 @@ int main()
     system("cls");
     
     //discount();
-    //h_w4_t1();
-    h_w4_t2();
+    h_w4_t1();
+    //h_w4_t2();
 
     system("chcp 866");
     return EXIT_SUCCESS;

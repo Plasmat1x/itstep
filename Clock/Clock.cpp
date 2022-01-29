@@ -1,4 +1,4 @@
-//file in ASCII(1251) code page
+ï»¿//file in ASCII(1251) code page
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -11,7 +11,10 @@
 #include <fstream>
 #include <thread>
 
-unsigned int size_ = 1024; //you can change size;
+//                      KB     MB     GB    reuslt size in RAM 4 * 1024 * 1024 * 1024 = 4 GB
+//unsigned int size_ = 1024 * 1024 * 1024;
+unsigned int size_ = 1024*1024*64; //you can change size;
+
 unsigned int size_byte = size_ * sizeof(int);
 unsigned int size_hepify = size_byte / sizeof(int);
 
@@ -28,7 +31,7 @@ bool ascending(int a, int b);
 void selection_sort(int* arr, unsigned int size, bool (*comparsionFcn)(int, int) = nullptr);
 
 void array_print(std::stringstream& ss, int* arr, unsigned int size, int n_col, int col_w = 2);
-void array_print_infile(std::stringstream& ss, int* arr, unsigned int size, int n_col, int col_w = 2);
+void array_print_infile(std::fstream& fs, int* arr, unsigned int size, int n_col, int col_w = 2);
 
 void heapify(int* arr, int n, int i);
 void heap_sort(int* arr, unsigned int n);
@@ -61,38 +64,49 @@ int main()
     static std::stringstream ss;
     static std::stringstream arrss;
     static std::fstream file_out;
+    static std::fstream file_sorted_array_out;
+    static std::fstream file_arry_out;
 
     int* arr = new int[size_];
 
-    std::cout << "<-- Ïðîâåêà âðåìåíè ðàáîòû àëãîðèòìîâ -->" << std::endl;
-    std::cout << "Ðàçìåð ìàññèâà: " << size_ * 4 << " áàéòîâ | êîëè÷åñòâî ýëåìåíòîâ ìàññèâà: " << size_ << std::endl;
-    std::cout << "Äîñòóïíî ïîòîêîâ: " << std::thread::hardware_concurrency() << std::endl;
+    fill_array(arr, size_);
+    file_arry_out.open("array_out.txt", std::ios::out);
+    file_arry_out << std::hex;
+    array_print_infile(file_arry_out, arr, size_, 16);
+    file_arry_out << std::dec;
+    file_arry_out.close();
+    std::cout << "Ð—Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ñ‹Ð¹ Ð¼Ð°ÑÑÐ¸Ð² Ð¿Ð¾Ð¼ÐµÑ‰ÐµÐ½ Ð² Ñ„Ð°Ð¹Ð» array_out.txt" << std::endl;
+
+    std::cout << "<-- ÐŸÑ€Ð¾Ð²ÐµÐºÐ° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ð°Ð»Ð³Ð¾Ñ€Ð¸Ñ‚Ð¼Ð¾Ð² -->" << std::endl;
+    std::cout << "Ð Ð°Ð·Ð¼ÐµÑ€ Ð¼Ð°ÑÑÐ¸Ð²Ð°: " << size_ * 4 << " Ð±Ð°Ð¹Ñ‚Ð¾Ð² | ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð¼Ð°ÑÑÐ¸Ð²Ð°: " << size_ << std::endl;
+    std::cout << "Ð”Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾ Ð¿Ð¾Ñ‚Ð¾ÐºÐ¾Ð²: " << std::thread::hardware_concurrency() << std::endl;
     std::cout << 
 R"(
-Ìåíþ:
+ÐœÐµÐ½ÑŽ:
                                      ====================================================================
-                                     |Âðåìåííàÿ ñëîæíîñòü                      | Âñïîìîãàòåëüíûå äàííûå |
+                                     |           Ð’Ñ€ÐµÐ¼ÐµÐ½Ð½Ð°Ñ ÑÐ»Ð¾Ð¶Ð½Ð¾ÑÑ‚ÑŒ           | Ð’ÑÐ¿Ð¾Ð¼Ð¾Ð³Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ |
                                      ====================================================================
-    1 - Ñîðòèðîâêà ïóçûðüêîì.        | O(n)        | O(n^2)      | O(n^2)      | O(1)                   |
-    2 - Ñîðòèðîâêà ñëèÿíèåì.         | O(n log(n)) | O(n log(n)) | O(n log(n)) | O(n)                   |
-    3 - Ñîðòèðîâêà âûáîðêîé.         | O(n^2)      | O(n^2)      | O(n^2)      | O(1)                   |
-    4 - Ñîðòèðîâêà áûñòðàÿ           | O(n^2)      | O(n^2)      | O(n^2)      | O(1)                   |
-    5 - Ñîðòèðîâêà ïèðàìèäàëüíàÿ     | O(n log(n)) | O(n log(n)) | O(n log(n)) | O(1)                   |
-    6 - Ñîðòèðîâêà âñòàâêàìè         | O(n)        | O(n^2)      | O(n^2)      | O(1)                   |
-    ! - Ñîðòèðîâêà áëî÷íàÿ           | O(n+k)      | O(n+k)      | O(n^2)      | O(nk)                  |
-    ! - Ñîðòèðîâêà ïîðàçðÿäíàÿ       | O(nk)       | O(nk)       | O(nk)       | O(n+k)                 |
+    1 - Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð¿ÑƒÐ·Ñ‹Ñ€ÑŒÐºÐ¾Ð¼.        | O(n)        | O(n^2)      | O(n^2)      | O(1)                   |
+    2 - Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° ÑÐ»Ð¸ÑÐ½Ð¸ÐµÐ¼.         | O(n log(n)) | O(n log(n)) | O(n log(n)) | O(n)                   |
+    3 - Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð²Ñ‹Ð±Ð¾Ñ€ÐºÐ¾Ð¹.         | O(n^2)      | O(n^2)      | O(n^2)      | O(1)                   |
+    4 - Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð±Ñ‹ÑÑ‚Ñ€Ð°Ñ.          | O(n^2)      | O(n^2)      | O(n^2)      | O(1)                   |
+    5 - Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð¿Ð¸Ñ€Ð°Ð¼Ð¸Ð´Ð°Ð»ÑŒÐ½Ð°Ñ.    | O(n log(n)) | O(n log(n)) | O(n log(n)) | O(1)                   |
+    6 - Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð²ÑÑ‚Ð°Ð²ÐºÐ°Ð¼Ð¸.        | O(n)        | O(n^2)      | O(n^2)      | O(1)                   |
+    ! - Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð±Ð»Ð¾Ñ‡Ð½Ð°Ñ.          | O(n+k)      | O(n+k)      | O(n^2)      | O(nk)                  |
+    ! - Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð¿Ð¾Ñ€Ð°Ð·Ñ€ÑÐ´Ð½Ð°Ñ.      | O(nk)       | O(nk)       | O(nk)       | O(n+k)                 |
                                      ====================================================================
-    0 - Âûõîä
+   99 - Ð’Ñ‹Ð²Ð¾Ð´ Ð±ÐµÐ· ÑÐ¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ¸
+    0 - Ð’Ñ‹Ñ…Ð¾Ð´
 )" << std::endl;
 
     int menu_state = 0;
-    std::cout << "Ââåäèòå íîìåð êîìàíäû > ";
+    std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ > ";
     std::cin >> menu_state;
-    std::cout << "Ïîäîæäèòå ïðîèçâîäèòñÿ ñîðòèðîâêà..." << std::endl;
+    std::cout << "ÐŸÐ¾Ð´Ð¾Ð¶Ð´Ð¸Ñ‚Ðµ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÑÑ ÑÐ¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ°..." << std::endl;
     if (size_ > 1024)
-        std::cout << "Ýòî íà äîëãî. Ñâåðíèòå êîíñîëü, íàéëåéòå ÷àéêó, âðåìÿ îò âðåìåíè ðàçâîðà÷èâàåòå è ñìîòðèòå ..." << std::endl;
+        std::cout << "Ð­Ñ‚Ð¾ Ð½Ð° Ð´Ð¾Ð»Ð³Ð¾. Ð¡Ð²ÐµÑ€Ð½Ð¸Ñ‚Ðµ ÐºÐ¾Ð½ÑÐ¾Ð»ÑŒ, Ð½Ð°Ð¹Ð»ÐµÐ¹Ñ‚Ðµ Ñ‡Ð°Ð¹ÐºÑƒ, Ð²Ñ€ÐµÐ¼Ñ Ð¾Ñ‚ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸ Ñ€Ð°Ð·Ð²Ð¾Ñ€Ð°Ñ‡Ð¸Ð²Ð°ÐµÑ‚Ðµ Ð¸ ÑÐ¼Ð¾Ñ‚Ñ€Ð¸Ñ‚Ðµ ..." << std::endl;
 
-    fill_array(arr, size_);
+    
 
     switch (menu_state)
     {
@@ -101,23 +115,26 @@ R"(
         return EXIT_SUCCESS;
     case 1: // bubble sort
     {
+        ss << "Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð¿ÑƒÐ·Ñ‹Ñ€ÑŒÐºÐ¾Ð¼ ";
         runtime_clock(arr, size_, ss, bubble_sort);
 
         break;
     }
     case 2: // merge sort
     {
+        ss << "Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° ÑÐ»Ð¸ÑÐ½Ð¸ÐµÐ¼ ";
         runtime_clock(arr, 0, size_ - 1, ss, merge_sort);
 
         break;
     }
     case 3: // selection sort
     {
+        ss << "Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð²Ñ‹Ð±Ð¾Ñ€ÐºÐ¾Ð¹ ";
         menu_state = 0;
-        std::cout << R"(Â êàêîì ïîðÿäêå ñîðòèðîâàòü:
-    0 - ïî âîçðàñòàíèþ
-    1 - ïî óáûâàíèþ)" << std::endl;
-        std::cout << "Ââåäèòå íîìåð êîìàíäû > ";
+        std::cout << R"(Ð’ ÐºÐ°ÐºÐ¾Ð¼ Ð¿Ð¾Ñ€ÑÐ´ÐºÐµ ÑÐ¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ:
+    0 - Ð¿Ð¾ Ð²Ð¾Ð·Ñ€Ð°ÑÑ‚Ð°Ð½Ð¸ÑŽ
+    1 - Ð¿Ð¾ ÑƒÐ±Ñ‹Ð²Ð°Ð½Ð¸ÑŽ)" << std::endl;
+        std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ > ";
         std::cin >> menu_state;
         std::cout << std::endl;
 
@@ -130,47 +147,58 @@ R"(
     }
     case 4: // quick sort
     {
+        ss << "Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð±Ñ‹ÑÑ‚Ñ€Ð°Ñ ";
         runtime_clock(arr, 0, size_ - 1, ss, quick_sort);
         break;
     }
         
     case 5: // heap sort
     {
+        ss << "Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð¿Ð¸Ñ€Ð°Ð¼Ð¸Ð´Ð°Ð»ÑŒÐ½Ð°Ñ ";
         runtime_clock(arr, size_hepify, ss, heap_sort);
         break;
     }
     case 6: //insertion sort
     {
+        ss << "Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð²ÑÑ‚Ð°Ð²ÐºÐ°Ð¼Ð¸ ";
         runtime_clock(arr, size_, ss, insert_sort);
         break;
     }
-
+    case 99:
+        ss << "Ð‘ÐµÐ· ÑÐ¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ¸ " << std::endl;
+        break;
     default: break;
     }
 
     menu_state = 0;
     std::cout <<
         R"(
-Êóäà ïðîèçâîäèòü âûâîä:
-    0 - Â êîíñîëü
-    1 - Â ôàéë
+ÐšÑƒÐ´Ð° Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÑŒ Ð²Ñ‹Ð²Ð¾Ð´:
+    0 - Ð’ ÐºÐ¾Ð½ÑÐ¾Ð»ÑŒ
+    1 - Ð’ Ñ„Ð°Ð¹Ð»
 
 )" << std::endl;
 
-    std::cout << "Ââåäèòå íîìåð êîìàíäû > ";
+    std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ > ";
     std::cin >> menu_state;
     std::cout << std::endl;
 
     switch (menu_state)
     {
     case 0:
-        system("cls");
 
-        arrss << std::hex;
-        array_print(arrss, arr, size_, 16, 2);
-        arrss << std::dec;
+        if (size_byte < 1024 * 1024 * 256 * 4)
+        {
+            arrss << std::hex;
+            array_print(arrss, arr, size_, 16, 2);
+            arrss << std::dec;
+        }
+        else
+        {
+            std::cout << "Ð’Ñ‹Ð²Ð¾Ð´ Ð² ÐºÐ¾Ð½ÑÐ¾Ð»ÑŒ Ð¼Ð°ÑÑÐ¸Ð²Ð° Ð¾Ñ‚Ð¼ÐµÐ½ÐµÐ½, Ð¾Ð±ÑŠÐµÐ¼ ÑÐ»Ð¸ÑˆÐºÐ¾Ð¼ Ð±Ð¾Ð»ÑŒÑˆÐ¾Ð¹!" << std::endl;
+        }
 
-        ss << std::endl << "Âðåìÿ âûïîëíåíèÿ ïðîãðàììû " << std::clock() << " ms" << std::endl;
+        ss << std::endl << "Ð’Ñ€ÐµÐ¼Ñ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹ " << std::clock() << " ms" << std::endl;
         std::cout << arrss.str() << std::endl;
         std::cout << ss.str() << std::endl;
 
@@ -180,13 +208,14 @@ R"(
     case 1:
         system("cls");
 
-        arrss << std::hex;
-        array_print_infile(arrss, arr, (int)size_, 16, 2);
-        arrss << std::dec;
-        ss << std::endl << "âðåìÿ âûïîëíåíèÿ ïðîãðàììû " << std::clock() << " ms" << std::endl;
-        
+        file_sorted_array_out.open("array_sort_out.txt", std::ios::out);
+        file_sorted_array_out << std::hex;
+        array_print_infile(file_sorted_array_out, arr, (int)size_, 16, 2);
+        file_sorted_array_out << std::dec;
+        file_sorted_array_out.close();
+        ss << std::endl << "ÐžÐ±ÑŠÐµÐ¼ Ð´Ð°Ð½Ð½Ñ‹Ñ…: " << size_byte << "Byte" << std::endl;
+        ss << std::endl << "Ð’Ñ€ÐµÐ¼Ñ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹ " << std::clock() << " ms" << std::endl;
         file_out.open("output.txt", std::ios::out);
-        file_out << arrss.str() << std::endl;
         file_out << ss.str();
         file_out.close();
 
@@ -309,19 +338,19 @@ void array_print(std::stringstream& ss, int* arr, unsigned int size, int n_col, 
     ss << std::endl;
 }
 
-void array_print_infile(std::stringstream& ss, int* arr, unsigned int size, int n_col, int col_w)
+void array_print_infile(std::fstream& fs, int* arr, unsigned int size, int n_col, int col_w)
 {
     for (unsigned int i = 0; i < size; )
     {
         for (int j = 0; j < n_col; j++)
         {
-            ss << std::setw(col_w) << arr[i] << " ";
+            fs << std::setw(col_w) << arr[i] << " ";
             i++;
         }
-        ss << std::endl;
+        fs << std::endl;
     }
 
-    ss << std::endl;
+    fs << std::endl;
 }
 
 void runtime_clock(int* arr, unsigned int size, std::stringstream& ss, void (*CallbackFcn)(int*, unsigned int))
@@ -335,7 +364,7 @@ void runtime_clock(int* arr, unsigned int size, std::stringstream& ss, void (*Ca
 
     e_timer = std::clock();
     r_time = e_timer - s_timer;
-    ss << "Ñîðòèðîâêà ïóçûðüêîì " << r_time << " ms" << std::endl;
+    ss << r_time << " ms" << std::endl;
 
 }
 
@@ -350,7 +379,7 @@ void runtime_clock(int* arr, int l, int r, std::stringstream& ss, void (*Callbac
 
     e_timer = std::clock();
     r_time = e_timer - s_timer;
-    ss << "Ñîðòèðîâêà ñëèÿíèåì " << r_time << " ms" << std::endl;
+    ss << r_time << " ms" << std::endl;
 }
 
 void runtime_clock(int* arr, unsigned int size, std::stringstream& ss, bool (*comparsionFcn)(int, int), void (*CallbackFcn)(int*, unsigned int, bool (*comparsionFcn)(int, int)))
@@ -364,7 +393,7 @@ void runtime_clock(int* arr, unsigned int size, std::stringstream& ss, bool (*co
 
     e_timer = std::clock();
     r_time = e_timer - s_timer;
-    ss << "Ñîðòèðîâêà âûáîðêîé " << r_time << " ms" << std::endl;
+    ss << r_time << " ms" << std::endl;
 }
 
 void merge_sort(int* arr, int l, int r)
@@ -377,10 +406,10 @@ void merge_sort(int* arr, int l, int r)
         for (int i = 0; i < n; i++)
             cin >> a[i];
 
-        merge(0, n — 1);
+        merge(0, n â€” 1);
 
         for (int i = 0; i < n; i++)
-            cout << a[i] << » «;
+            cout << a[i] << Â» Â«;
 
         getch();
         return 0;
