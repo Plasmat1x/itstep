@@ -1,6 +1,6 @@
 #include <cstdlib>
 #include <iostream>
-#include <cmath>
+//#include <cmath>
 
 int main()
 {
