@@ -10,28 +10,29 @@ void Core::threadx_fnc()
 
 void Core::thread1_fnc()
 {
-    std::cout << "<----thread_1 start---->" << std::endl;
+    std::cout << "\t\t\t\t\t<----thread_1 start---->" << std::endl;
 
     for (int i = 0; i < 25; i++)
     {
-        std::cout << " THREAD1::ITERATION::" << i << std::endl;
+        std::cout << "\t\t\t\t\t THREAD1::ITERATION::" << i << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(750));
     }
 
-    std::cout << "<----thread_1 end---->" << std::endl;
+    std::cout << "\t\t\t\t\t<----thread_1 end---->" << std::endl;
 }
 
 void Core::thread2_fnc()
 {
-    std::cout << "\t\t\t\t\t<----thread_2 start---->" << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(5));
+    std::cout << "\t\t\t\t\t\t\t\t\t\t<----thread_2 start---->" << std::endl;
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 7; i++)
     {
-        std::cout << "\t\t\t\t\t THREAD2::ITERATION::" << i << std::endl;
+        std::cout << "\t\t\t\t\t\t\t\t\t\t THREAD2::ITERATION::" << i << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     }
 
-    std::cout << "\t\t\t\t\t<----thread_2 end---->" << std::endl;
+    std::cout << "\t\t\t\t\t\t\t\t\t\t<----thread_2 end---->" << std::endl;
 }
 
 Core::Core() :

@@ -10,13 +10,14 @@
 #include <utility>
 #include <fstream>
 #include <thread>
+#include <Windows.h>
 
 #include "thread_guard.h"
 
 //                      KB     MB     GB    reuslt size in RAM 4 * 1024 * 1024 * 1024 = 4 GB
 //unsigned int size_ = 1024 * 1024 * 1024;
 
-unsigned int size_ = 1024 * 32;
+unsigned int size_ = 1024 * 100;
 //unsigned int size_ = 256; //you can change size;
 
 unsigned int size_byte = size_ * sizeof(int);
@@ -110,8 +111,7 @@ menu:
     if (size_ > 1024)
         std::cout << "it will be long time" << std::endl;
 
-
-
+    bool sort = true;
     switch (menu_state)
     {
     case 0:
@@ -125,9 +125,10 @@ menu:
         unsigned l_s = size_;
         std::stringstream* l_ss = &ss;
         t = std::thread(
-            [arr, l_s, l_ss]()->void
+            [arr, l_s, l_ss, &sort]()->void
             {
-                std::cout << "thread created" << std::endl;
+                std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+                std::cout << "thread created::sort start" << std::endl;
                 std::clock_t s_timer;
                 std::clock_t e_timer;
                 std::clock_t r_time;
@@ -138,12 +139,12 @@ menu:
                 e_timer = std::clock();
                 r_time = e_timer - s_timer;
                 (*l_ss) << r_time << " ms" << std::endl;
-                std::cout << "thread destructed" << std::endl;
+                std::cout << "thread destructed::sort end" << std::endl;
+                sort = false;
             }
         
         );
-        t.join();
-        //t.detach(); //если не дать завершиться сортировке, вывод массива будет на том моменте сортировки до которого успел
+        t.detach();
         break;
     }
     case 2: // merge sort
@@ -208,11 +209,31 @@ output destination:
     std::cout << "enter command number > ";
     std::cin >> menu_state;
     std::cout << std::endl;
+    
+    //красивостей на время ожидания сортировки
+    while (sort)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            Sleep(1500);
+            std::cout << ". ";    
+        }
 
+        std::cout << "\r\r\r\r\r\r";
+
+        for (int i = 0; i < 3; i++)
+        {
+            Sleep(1500);
+            std::cout << "  ";
+        }
+
+        std::cout << "\r\r\r\r\r\r";
+    }
+
+    std::cout << std::endl;
     switch (menu_state)
     {
     case 0:
-
         if (size_byte < 1024 * 1024 * 256 * 4)
         {
             arrss << std::hex;
@@ -234,6 +255,7 @@ output destination:
     case 1:
         system("cls");
 
+        t.join(); //! thread join
         file_sorted_array_out.open("array_sort_out.txt", std::ios::out);
         file_sorted_array_out << std::hex;
         array_print_infile(file_sorted_array_out, arr, (int)size_, 16, 2);

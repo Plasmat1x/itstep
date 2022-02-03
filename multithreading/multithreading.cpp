@@ -9,9 +9,9 @@ int main()
 {
     Core core;
 
-    //core.run();
+    core.run();
 
-    tz::testmain();
+    //tz::testmain();
 
     return EXIT_SUCCESS;
 }
