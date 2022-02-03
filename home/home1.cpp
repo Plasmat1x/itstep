@@ -8,28 +8,28 @@ int main(int argc, char* argv[])
     //homework
 
     /*
-    Алгоритм перехода дороги:
-    0. Начало
-    1. Определить наличие светофора
-    2. Если светофор есть и он работает то определить текущий цвет светофора иначе посмотреть на лево //(логическое и в условии) if (true && true)
-    2.1. если цвет зеленый то убедившись в безопасности перейти дорогу иначе пока не горит зеленый цвет
-    2.1.1. подождать
-    2.1.2. определить текущий цвет
-    2.1.3. убедившись в безопасности перейти дорогу
-    2.2. определить наличие машин 
-    2.3. пока есть машины
-    2.3.1. подождать, посмотреть на лево
-    2.3.2. определить наличие машин
-    2.4. убедившись в безопасности дойти до середины дороги
-    2.5. до тех пор пока есть машины
-    2.5.1. если смотрели на право подождать иначе посмотреть на право
-    2.5.2. определить наличие машин
-    2.5.3. убедиться в безопасности, дойти до конца дороги
-    3. конец
+    РђР»РіРѕСЂРёС‚Рј РїРµСЂРµС…РѕРґР° РґРѕСЂРѕРіРё:
+    0. РќР°С‡Р°Р»Рѕ
+    1. РћРїСЂРµРґРµР»РёС‚СЊ РЅР°Р»РёС‡РёРµ СЃРІРµС‚РѕС„РѕСЂР°
+    2. Р•СЃР»Рё СЃРІРµС‚РѕС„РѕСЂ РµСЃС‚СЊ Рё РѕРЅ СЂР°Р±РѕС‚Р°РµС‚ С‚Рѕ РѕРїСЂРµРґРµР»РёС‚СЊ С‚РµРєСѓС‰РёР№ С†РІРµС‚ СЃРІРµС‚РѕС„РѕСЂР° РёРЅР°С‡Рµ РїРѕСЃРјРѕС‚СЂРµС‚СЊ РЅР° Р»РµРІРѕ //(Р»РѕРіРёС‡РµСЃРєРѕРµ Рё РІ СѓСЃР»РѕРІРёРё) if (true && true)
+    2.1. РµСЃР»Рё С†РІРµС‚ Р·РµР»РµРЅС‹Р№ С‚Рѕ СѓР±РµРґРёРІС€РёСЃСЊ РІ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё РїРµСЂРµР№С‚Рё РґРѕСЂРѕРіСѓ РёРЅР°С‡Рµ РїРѕРєР° РЅРµ РіРѕСЂРёС‚ Р·РµР»РµРЅС‹Р№ С†РІРµС‚
+    2.1.1. РїРѕРґРѕР¶РґР°С‚СЊ
+    2.1.2. РѕРїСЂРµРґРµР»РёС‚СЊ С‚РµРєСѓС‰РёР№ С†РІРµС‚
+    2.1.3. СѓР±РµРґРёРІС€РёСЃСЊ РІ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё РїРµСЂРµР№С‚Рё РґРѕСЂРѕРіСѓ
+    2.2. РѕРїСЂРµРґРµР»РёС‚СЊ РЅР°Р»РёС‡РёРµ РјР°С€РёРЅ 
+    2.3. РїРѕРєР° РµСЃС‚СЊ РјР°С€РёРЅС‹
+    2.3.1. РїРѕРґРѕР¶РґР°С‚СЊ, РїРѕСЃРјРѕС‚СЂРµС‚СЊ РЅР° Р»РµРІРѕ
+    2.3.2. РѕРїСЂРµРґРµР»РёС‚СЊ РЅР°Р»РёС‡РёРµ РјР°С€РёРЅ
+    2.4. СѓР±РµРґРёРІС€РёСЃСЊ РІ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё РґРѕР№С‚Рё РґРѕ СЃРµСЂРµРґРёРЅС‹ РґРѕСЂРѕРіРё
+    2.5. РґРѕ С‚РµС… РїРѕСЂ РїРѕРєР° РµСЃС‚СЊ РјР°С€РёРЅС‹
+    2.5.1. РµСЃР»Рё СЃРјРѕС‚СЂРµР»Рё РЅР° РїСЂР°РІРѕ РїРѕРґРѕР¶РґР°С‚СЊ РёРЅР°С‡Рµ РїРѕСЃРјРѕС‚СЂРµС‚СЊ РЅР° РїСЂР°РІРѕ
+    2.5.2. РѕРїСЂРµРґРµР»РёС‚СЊ РЅР°Р»РёС‡РёРµ РјР°С€РёРЅ
+    2.5.3. СѓР±РµРґРёС‚СЊСЃСЏ РІ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё, РґРѕР№С‚Рё РґРѕ РєРѕРЅС†Р° РґРѕСЂРѕРіРё
+    3. РєРѕРЅРµС†
     */
     std::cout << "\n" << "The Library of Babel is a place for scholars to do research, for artists\n";
     std::cout << "\t" << "and writers to seek inspiration, for anyone with curiosity or a sense of\n";
-    std::cout << "\t\t" << "humor to reflect on the weirdness of existence - in short, it’s just like\n";
+    std::cout << "\t\t" << "humor to reflect on the weirdness of existence - in short, itвЂ™s just like\n";
     std::cout << "\t\t\t" << "any other library.If completed, it would contain every possible\n";
     std::cout << "\t\t\t\t" << "combination of 1, 312, 000 characters, including lower case letters,\n";
     std::cout << "\t\t\t\t\t" << "space, comma, and period.Thus, it would contain every book that ever\n";   
@@ -37,8 +37,8 @@ int main(int argc, char* argv[])
     std::cout << "\t\t\t\t\t\t\t" << "play, every song, every scientific paper, every legal decision, every\n";
     std::cout << "\t\t\t\t\t\t\t\t" << "constitution, every piece of scripture, and so on.At present it contains\n";
     std::cout << "\t\t\t\t\t\t\t\t\t" << "all possible pages of 3200 characters, about 104677 books.\n";
-    std::cout << "\n" << "Since I imagine the question will present itself in some visitors’ minds\n";
-    std::cout << "\t" << "(a certain amount of distrust of the virtual is inevitable) I’ll head off any\n";
+    std::cout << "\n" << "Since I imagine the question will present itself in some visitorsвЂ™ minds\n";
+    std::cout << "\t" << "(a certain amount of distrust of the virtual is inevitable) IвЂ™ll head off any\n";
     std::cout << "\t\t" << "doubts : any text you find in any location of the library will be in the\n";
     std::cout << "\t\t\t" << "same place in perpetuity.We do not simply generateand store books as\n";
     std::cout << "\t\t\t\t" << "they are requested - in fact, the storage demands would make that\n";
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
     std::cout << R"(
 The Library of Babel is a place for scholars to do research, for artists 
     and writers to seek inspiration, for anyone with curiosity or a sense of 
-        humor to reflect on the weirdness of existence - in short, it’s just like 
+        humor to reflect on the weirdness of existence - in short, itвЂ™s just like 
             any other library. If completed, it would contain every possible 
                 combination of 1,312,000 characters, including lower case letters, 
                     space, comma, and period. Thus, it would contain every book that ever 
@@ -62,8 +62,8 @@ The Library of Babel is a place for scholars to do research, for artists
                                 constitution, every piece of scripture, and so on. At present it contains 
                                     all possible pages of 3200 characters, about 104677 books.
 
-Since I imagine the question will present itself in some visitors’ minds 
-    (a certain amount of distrust of the virtual is inevitable) I’ll head off any 
+Since I imagine the question will present itself in some visitorsвЂ™ minds 
+    (a certain amount of distrust of the virtual is inevitable) IвЂ™ll head off any 
         doubts: any text you find in any location of the library will be in the 
             same place in perpetuity. We do not simply generate and store books as 
                 they are requested - in fact, the storage demands would make that 
@@ -76,8 +76,8 @@ Since I imagine the question will present itself in some visitors’ minds
 
     //task 1
 
-    double R0, R1, R2, R3; //множественая инициализация
-    R0 = R1 = R2 = R3 = 0; //множественное присвоение
+    double R0, R1, R2, R3; //РјРЅРѕР¶РµСЃС‚РІРµРЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
+    R0 = R1 = R2 = R3 = 0; //РјРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРµ РїСЂРёСЃРІРѕРµРЅРёРµ
 
     std::cout << "input R1: ";
     std::cin >> R1;
@@ -95,7 +95,7 @@ Since I imagine the question will present itself in some visitors’ minds
 
     //task 2
 
-    const double PI = 3.14; // константа - нельзя изменить во время выполнения
+    const double PI = 3.14; // РєРѕРЅСЃС‚Р°РЅС‚Р° - РЅРµР»СЊР·СЏ РёР·РјРµРЅРёС‚СЊ РІРѕ РІСЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ
     double S, R, L;
     S = R = L = 0;
     std::cout << "input length circle: ";
@@ -107,14 +107,14 @@ Since I imagine the question will present itself in some visitors’ minds
     R = L / (2 * PI);
 
     //S = PI * R^2
-    S = PI * std::pow(R, 2); // pow(a, b) из библиотеки cmath где а - число b - степень;
+    S = PI * std::pow(R, 2); // pow(a, b) РёР· Р±РёР±Р»РёРѕС‚РµРєРё cmath РіРґРµ Р° - С‡РёСЃР»Рѕ b - СЃС‚РµРїРµРЅСЊ;
     std::cout << "result S = " << S;
     std::cout << std::endl << std::endl;
     
     //task 3
 
     double v, t, a;
-    S = v = t = a = 0; // множественное присвоение, так как S уже была проинициализирована остаеться только обнулить 
+    S = v = t = a = 0; // РјРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРµ РїСЂРёСЃРІРѕРµРЅРёРµ, С‚Р°Рє РєР°Рє S СѓР¶Рµ Р±С‹Р»Р° РїСЂРѕРёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅР° РѕСЃС‚Р°РµС‚СЊСЃСЏ С‚РѕР»СЊРєРѕ РѕР±РЅСѓР»РёС‚СЊ 
     
     //S = v * t + (a * t^2) / 2
     std::cout << "input speed: ";

@@ -8,14 +8,14 @@ int main()
     system("cls");
 
     //n8 253-288 //n1 1-36
-    //переменные искомой квартиры
-    int app_number = 0; //номер квартиры    // вводится с клавиатуры
-    int flr_number = 0; //номер этажа       // расчитывается
-    int blk_number = 0; //номер подъезда    // расчитывается
+    //РїРµСЂРµРјРµРЅРЅС‹Рµ РёСЃРєРѕРјРѕР№ РєРІР°СЂС‚РёСЂС‹
+    int app_number = 0; //РЅРѕРјРµСЂ РєРІР°СЂС‚РёСЂС‹    // РІРІРѕРґРёС‚СЃСЏ СЃ РєР»Р°РІРёР°С‚СѓСЂС‹
+    int flr_number = 0; //РЅРѕРјРµСЂ СЌС‚Р°Р¶Р°       // СЂР°СЃС‡РёС‚С‹РІР°РµС‚СЃСЏ
+    int blk_number = 0; //РЅРѕРјРµСЂ РїРѕРґСЉРµР·РґР°    // СЂР°СЃС‡РёС‚С‹РІР°РµС‚СЃСЏ
 
-    int apps_onfloor = 0;   //кол-во кв на этаже        //вводится с клавиатуры
-    int floors_onblock = 0; //кол-во этажей в подъезде  //вводится с клавиатуры
-    int blk_inhouse = 0;    //кол-во подъездов в доме   //вводится с клавиатуры
+    int apps_onfloor = 0;   //РєРѕР»-РІРѕ РєРІ РЅР° СЌС‚Р°Р¶Рµ        //РІРІРѕРґРёС‚СЃСЏ СЃ РєР»Р°РІРёР°С‚СѓСЂС‹
+    int floors_onblock = 0; //РєРѕР»-РІРѕ СЌС‚Р°Р¶РµР№ РІ РїРѕРґСЉРµР·РґРµ  //РІРІРѕРґРёС‚СЃСЏ СЃ РєР»Р°РІРёР°С‚СѓСЂС‹
+    int blk_inhouse = 0;    //РєРѕР»-РІРѕ РїРѕРґСЉРµР·РґРѕРІ РІ РґРѕРјРµ   //РІРІРѕРґРёС‚СЃСЏ СЃ РєР»Р°РІРёР°С‚СѓСЂС‹
 
     std::cout << "Programm house, bloack and floor by appartaments number\n" << std::endl;
 
@@ -56,10 +56,10 @@ int main()
     */
 
 
-    int total_apps_onblock = (floors_onblock * apps_onfloor);                   //кол-во квартир в подъезде
-    int total_apps = (total_apps_onblock * blk_inhouse);                        //для проверки на не правильную квартиру
-    blk_number = app_number / total_apps_onblock;                               //расчет искомого подъезда
-    flr_number = (app_number - blk_number * total_apps_onblock) / apps_onfloor; //расчет искомого этажа
+    int total_apps_onblock = (floors_onblock * apps_onfloor);                   //РєРѕР»-РІРѕ РєРІР°СЂС‚РёСЂ РІ РїРѕРґСЉРµР·РґРµ
+    int total_apps = (total_apps_onblock * blk_inhouse);                        //РґР»СЏ РїСЂРѕРІРµСЂРєРё РЅР° РЅРµ РїСЂР°РІРёР»СЊРЅСѓСЋ РєРІР°СЂС‚РёСЂСѓ
+    blk_number = app_number / total_apps_onblock;                               //СЂР°СЃС‡РµС‚ РёСЃРєРѕРјРѕРіРѕ РїРѕРґСЉРµР·РґР°
+    flr_number = (app_number - blk_number * total_apps_onblock) / apps_onfloor; //СЂР°СЃС‡РµС‚ РёСЃРєРѕРјРѕРіРѕ СЌС‚Р°Р¶Р°
 
     if (app_number > total_apps || app_number < 1 ) 
         std::cout << "wrong appartments number" << std::endl;

@@ -2,7 +2,7 @@
 
 namespace mmath // minus global scope
 {
-    // namespace для факториала
+    // namespace РґР»СЏ С„Р°РєС‚РѕСЂРёР°Р»Р°
     //int i = 1;
     //unsigned long int result = 0;
 
