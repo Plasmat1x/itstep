@@ -45,6 +45,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ulitka", "Ulitka\Ulitka.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multithreading", "multithreading\multithreading.vcxproj", "{0F76FE32-B13B-4C4A-9A33-1995558DC568}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Clock2.0", "Clock2.0\Clock2.0.vcxproj", "{49CFA262-E925-416B-8574-E9293AFE317D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -173,6 +175,14 @@ Global
 		{0F76FE32-B13B-4C4A-9A33-1995558DC568}.Release|x64.Build.0 = Release|x64
 		{0F76FE32-B13B-4C4A-9A33-1995558DC568}.Release|x86.ActiveCfg = Release|Win32
 		{0F76FE32-B13B-4C4A-9A33-1995558DC568}.Release|x86.Build.0 = Release|Win32
+		{49CFA262-E925-416B-8574-E9293AFE317D}.Debug|x64.ActiveCfg = Debug|x64
+		{49CFA262-E925-416B-8574-E9293AFE317D}.Debug|x64.Build.0 = Debug|x64
+		{49CFA262-E925-416B-8574-E9293AFE317D}.Debug|x86.ActiveCfg = Debug|Win32
+		{49CFA262-E925-416B-8574-E9293AFE317D}.Debug|x86.Build.0 = Debug|Win32
+		{49CFA262-E925-416B-8574-E9293AFE317D}.Release|x64.ActiveCfg = Release|x64
+		{49CFA262-E925-416B-8574-E9293AFE317D}.Release|x64.Build.0 = Release|x64
+		{49CFA262-E925-416B-8574-E9293AFE317D}.Release|x86.ActiveCfg = Release|Win32
+		{49CFA262-E925-416B-8574-E9293AFE317D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -188,6 +198,7 @@ Global
 		{22BB66A6-6901-4DD8-8656-5035FCE0D771} = {009B281B-12F3-400C-BF8C-ECABCE25253B}
 		{C6350709-3E04-4E37-A4F2-253172261AF5} = {009B281B-12F3-400C-BF8C-ECABCE25253B}
 		{0F76FE32-B13B-4C4A-9A33-1995558DC568} = {C6350709-3E04-4E37-A4F2-253172261AF5}
+		{49CFA262-E925-416B-8574-E9293AFE317D} = {C6350709-3E04-4E37-A4F2-253172261AF5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1652098-55C4-468C-BE57-58491437E0DF}

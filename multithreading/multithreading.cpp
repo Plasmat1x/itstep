@@ -3,15 +3,15 @@
 
 #include"Core.h"
 
+#include"test_for_main.h"
+
 int main()
 {
-    system("chcp1251");
-    system("cls");
-
     Core core;
 
-    core.run();
+    //core.run();
 
-    system("chcp 866");
+    tz::testmain();
+
     return EXIT_SUCCESS;
 }

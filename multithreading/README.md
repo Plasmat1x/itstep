@@ -100,3 +100,73 @@ void Core::run()
     delete t;
 }
 ```
+
+## Потоки с параметрами
+
+Для передачи функции с параметрами используется:
+```
+#include<iostream>
+#include<cstdlib>
+#include<thread>
+
+namespace tz
+{
+    void fnc();
+    void fncx(int a, int b);
+    void testmain();
+};
+
+void tz::fnc()
+{
+    std::cout << "hello thread" << std::endl;
+}
+
+void tz::fncx(int a, int b)
+{
+    std::cout << "hello param thread " << a+b << std::endl;
+}
+
+void tz::testmain()
+{
+{
+    std::thread t(tz::fnc);                             //yep
+    t.detach();
+  //std::thread t((tz::fncx)(5,6));                     //nope
+  //std::thread t{ tz::fncx(5,6) };                     //nope
+  //std::thread t((*tx)(int, int));                     //nope
+  //std::thread t(tz::fncx, 5, 6);                      //yep
+  //std::thread t{ tz::fncx, 5, 6 };                    //yep
+  //std::thread t{ tz::clbck, tz::fncx, 50, 60 };       //nope    //попытка передачи функции в качестве параметра
+  //std::thread t{ tz::clbck, (tz::fncx)(50,60)};       //nope
+  //std::thread t{ tz::clbck, tz::fncx(50,60)};         //nope
+
+  //int a = 50, b = 60;                                 
+  //std::thread t{ [a,b]()->void                        //yep    //удалось сделать через лямбда-функцию 
+  //{
+  //    fncx(a,b);
+  //}
+  //};
+    t = std::thread(tz::fncx, 20, 20);                  //yep    //финт ушами без создания новой перемнной
+
+    t.join();
+}
+```
+
+## Chrono управляй временем
+
+В данном случае используется для создания искусственного различия в скорости
+*пример кода в использовании (используется подобная функция для второго потока с другим временем ожидания потока)*
+```
+void Core::fnc()
+{
+    std::cout << "<----thread start---->" << std::endl;
+
+    for (int i = 0; i < 25; i++)
+    {
+        std::cout << " THREAD::ITERATION::" << i << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(750));
+    }
+
+    std::cout << "<----thread end---->" << std::endl;
+}
+```

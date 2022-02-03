@@ -362,5 +362,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
+clock/*.txt
+clock2.0/*.txt
 *.exe
 *.7z
