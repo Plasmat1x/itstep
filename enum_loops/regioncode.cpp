@@ -39,42 +39,42 @@ void reg::regioncode()
 
     switch (code)
     {
-        //на допил 
+        //РЅР° РґРѕРїРёР» 
     case Regions::Ekb:
     case Regions::Ekb1:
     case Regions::Ekb2:
     case Regions::Ekb3:
-        std::cout << "Свердловская область!" << std::endl;
+        std::cout << "РЎРІРµСЂРґР»РѕРІСЃРєР°СЏ РѕР±Р»Р°СЃС‚СЊ!" << std::endl;
         break;
 
     case Regions::Chel:
     case Regions::Chel1:
     case Regions::Chel2:
-        std::cout << "Челябинская область!" << std::endl;
+        std::cout << "Р§РµР»СЏР±РёРЅСЃРєР°СЏ РѕР±Р»Р°СЃС‚СЊ!" << std::endl;
         break;
 
     case Regions::Vld:
     case Regions::Vld1:
-        std::cout << "Приморский край!" << std::endl;
+        std::cout << "РџСЂРёРјРѕСЂСЃРєРёР№ РєСЂР°Р№!" << std::endl;
         break;
 
     case Regions::Tom:
-        std::cout << "Томкася область!" << std::endl;
+        std::cout << "РўРѕРјРєР°СЃСЏ РѕР±Р»Р°СЃС‚СЊ!" << std::endl;
         break;
     case Regions::Alt:
-        std::cout << "Алтайский край!" << std::endl;
+        std::cout << "РђР»С‚Р°Р№СЃРєРёР№ РєСЂР°Р№!" << std::endl;
         break;
     case Regions::Dag:
-        std::cout << "Республика Дагестан!" << std::endl;
+        std::cout << "Р РµСЃРїСѓР±Р»РёРєР° Р”Р°РіРµСЃС‚Р°РЅ!" << std::endl;
         break;
     case Regions::Kem:
-        std::cout << "Кемеровская область!" << std::endl;
+        std::cout << "РљРµРјРµСЂРѕРІСЃРєР°СЏ РѕР±Р»Р°СЃС‚СЊ!" << std::endl;
         break;
     case Regions::Ksn:
-        std::cout << "Красноярский край!" << std::endl;
+        std::cout << "РљСЂР°СЃРЅРѕСЏСЂСЃРєРёР№ РєСЂР°Р№!" << std::endl;
         break;
     case Regions::Tyv:
-        std::cout << "Республика Тыва!" << std::endl;
+        std::cout << "Р РµСЃРїСѓР±Р»РёРєР° РўС‹РІР°!" << std::endl;
 
 
 

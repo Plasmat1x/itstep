@@ -4,7 +4,7 @@
 
 void enu::enu()
 {
-    std::cout << "-- Ïğîãğàììà äëÿ îïğåäåëåíèÿ äíÿ íåäåëè --" << std::endl;
+    std::cout << "-- ĞŸÑ€Ğ¾Ğ³Ñ€Ğ°Ğ¼Ğ¼Ğ° Ğ´Ğ»Ñ Ğ¾Ğ¿Ñ€ĞµĞ´ĞµĞ»ĞµĞ½Ğ¸Ñ Ğ´Ğ½Ñ Ğ½ĞµĞ´ĞµĞ»Ğ¸ --" << std::endl;
     int day = 0;
 
     std::cout << "enter number of day "; std::cin >> day;
