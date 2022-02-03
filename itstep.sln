@@ -43,6 +43,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab-x0", "lab-x0\lab-x0.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ulitka", "Ulitka\Ulitka.vcxproj", "{13509510-2703-424E-9198-E5A7CAE90D2D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multithreading", "multithreading\multithreading.vcxproj", "{0F76FE32-B13B-4C4A-9A33-1995558DC568}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -163,6 +165,14 @@ Global
 		{13509510-2703-424E-9198-E5A7CAE90D2D}.Release|x64.Build.0 = Release|x64
 		{13509510-2703-424E-9198-E5A7CAE90D2D}.Release|x86.ActiveCfg = Release|Win32
 		{13509510-2703-424E-9198-E5A7CAE90D2D}.Release|x86.Build.0 = Release|Win32
+		{0F76FE32-B13B-4C4A-9A33-1995558DC568}.Debug|x64.ActiveCfg = Debug|x64
+		{0F76FE32-B13B-4C4A-9A33-1995558DC568}.Debug|x64.Build.0 = Debug|x64
+		{0F76FE32-B13B-4C4A-9A33-1995558DC568}.Debug|x86.ActiveCfg = Debug|Win32
+		{0F76FE32-B13B-4C4A-9A33-1995558DC568}.Debug|x86.Build.0 = Debug|Win32
+		{0F76FE32-B13B-4C4A-9A33-1995558DC568}.Release|x64.ActiveCfg = Release|x64
+		{0F76FE32-B13B-4C4A-9A33-1995558DC568}.Release|x64.Build.0 = Release|x64
+		{0F76FE32-B13B-4C4A-9A33-1995558DC568}.Release|x86.ActiveCfg = Release|Win32
+		{0F76FE32-B13B-4C4A-9A33-1995558DC568}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,6 +187,7 @@ Global
 		{1C34EE61-94B6-4684-90CF-111DB8CF6A70} = {009B281B-12F3-400C-BF8C-ECABCE25253B}
 		{22BB66A6-6901-4DD8-8656-5035FCE0D771} = {009B281B-12F3-400C-BF8C-ECABCE25253B}
 		{C6350709-3E04-4E37-A4F2-253172261AF5} = {009B281B-12F3-400C-BF8C-ECABCE25253B}
+		{0F76FE32-B13B-4C4A-9A33-1995558DC568} = {C6350709-3E04-4E37-A4F2-253172261AF5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1652098-55C4-468C-BE57-58491437E0DF}
