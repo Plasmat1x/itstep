@@ -38,7 +38,7 @@ void tz::testmain()
   //    fncx(a,b);
   //}
   //};
-    t = std::thread(tz::fncx, 20, 20);
+  //t = std::thread(tz::fncx, 20, 20);
 
     t.join();
 }

@@ -47,6 +47,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multithreading", "multithre
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Clock2.0", "Clock2.0\Clock2.0.vcxproj", "{49CFA262-E925-416B-8574-E9293AFE317D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab-x1", "lab-x1\lab-x1.vcxproj", "{2519E8A2-F9B8-4145-8E1C-A16FF24618ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -183,6 +185,14 @@ Global
 		{49CFA262-E925-416B-8574-E9293AFE317D}.Release|x64.Build.0 = Release|x64
 		{49CFA262-E925-416B-8574-E9293AFE317D}.Release|x86.ActiveCfg = Release|Win32
 		{49CFA262-E925-416B-8574-E9293AFE317D}.Release|x86.Build.0 = Release|Win32
+		{2519E8A2-F9B8-4145-8E1C-A16FF24618ED}.Debug|x64.ActiveCfg = Debug|x64
+		{2519E8A2-F9B8-4145-8E1C-A16FF24618ED}.Debug|x64.Build.0 = Debug|x64
+		{2519E8A2-F9B8-4145-8E1C-A16FF24618ED}.Debug|x86.ActiveCfg = Debug|Win32
+		{2519E8A2-F9B8-4145-8E1C-A16FF24618ED}.Debug|x86.Build.0 = Debug|Win32
+		{2519E8A2-F9B8-4145-8E1C-A16FF24618ED}.Release|x64.ActiveCfg = Release|x64
+		{2519E8A2-F9B8-4145-8E1C-A16FF24618ED}.Release|x64.Build.0 = Release|x64
+		{2519E8A2-F9B8-4145-8E1C-A16FF24618ED}.Release|x86.ActiveCfg = Release|Win32
+		{2519E8A2-F9B8-4145-8E1C-A16FF24618ED}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

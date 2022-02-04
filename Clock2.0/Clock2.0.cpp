@@ -47,9 +47,11 @@ void quick_sort(int* arr, int l, int r);
 
 void insert_sort(int* arr, unsigned int n);
 
+/*
 void runtime_clock(int* arr, unsigned int size, std::stringstream& ss, void (*CallbackFcn)(int*, unsigned int));
 void runtime_clock(int* arr, int l, int r, std::stringstream& ss, void (*CallbackFcn)(int*, int, int));
 void runtime_clock(int* arr, unsigned int size, std::stringstream& ss, bool (*comparsionFcn)(int, int), void (*CallBackFcn)(int*, unsigned int, bool (*comparsionFcn)(int, int)));
+//*/
 
 int main()
 {
@@ -151,7 +153,8 @@ ________________________________________________________________________________
         //runtime_clock(arr, 0, size_ - 1, ss, merge_sort);
         unsigned int l_s = size_;
         std::stringstream* l_ss = &ss;
-        t = std::thread([arr, l_s, l_ss, &sort]()->void
+        t = std::thread(
+            [arr, l_s, l_ss, &sort]()->void
             {
                 std::this_thread::sleep_for(std::chrono::milliseconds(3000));
                 std::cout << "thread created::sort start" << std::endl;
@@ -520,6 +523,7 @@ void array_print_infile(std::fstream& fs, int* arr, unsigned int size, int n_col
     fs << std::endl;
 }
 
+/*
 void runtime_clock(int* arr, unsigned int size, std::stringstream& ss, void (*CallbackFcn)(int*, unsigned int))
 {
     std::clock_t s_timer;
@@ -562,7 +566,7 @@ void runtime_clock(int* arr, unsigned int size, std::stringstream& ss, bool (*co
     r_time = e_timer - s_timer;
     ss << r_time << " ms" << std::endl;
 }
-
+//*/
 void merge_sort(int* arr, int l, int r)
 {
     /*usability
