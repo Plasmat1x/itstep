@@ -18,12 +18,13 @@ void Core::thread1_fnc()
         std::this_thread::sleep_for(std::chrono::milliseconds(750));
     }
 
-    std::cout << "\t\t\t\t\t<----thread_1 end---->" << std::endl;
+    std::cout << "\t\t\t\t\t<----thread_1   end---->" << std::endl;
 }
 
 void Core::thread2_fnc()
 {
     std::this_thread::sleep_for(std::chrono::milliseconds(5));
+
     std::cout << "\t\t\t\t\t\t\t\t\t\t<----thread_2 start---->" << std::endl;
 
     for (int i = 0; i < 7; i++)
@@ -32,7 +33,7 @@ void Core::thread2_fnc()
         std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     }
 
-    std::cout << "\t\t\t\t\t\t\t\t\t\t<----thread_2 end---->" << std::endl;
+    std::cout << "\t\t\t\t\t\t\t\t\t\t<----thread_2   end---->" << std::endl;
 }
 
 Core::Core() :
@@ -55,8 +56,14 @@ void Core::run()
     thread1 = new std::thread(&Core::thread1_fnc, this);
     thread2 = new std::thread(&Core::thread2_fnc, this);
 
+    for (int i = 0; i < 30; i++)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        std::cout << " M::THREAD::ITERATION::" << i << std::endl;
+    }
+
     thread1->join();
     thread2->join();
 
-    std::cout << "<----main thread end---->" << std::endl;
+    std::cout << "<----main thread   end---->" << std::endl;
 }
