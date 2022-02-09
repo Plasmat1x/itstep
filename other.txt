@@ -34,3 +34,74 @@
     
     // ²√x -> n = ²
     x^(1/n)
+
+    //
+    CONSOLE_FONT_INFOEX cfi;
+    cfi.cbSize = sizeof(CONSOLE_FONT_INFOEX);
+    cfi.nFont = 6;
+    cfi.dwFontSize.X = 7;
+    cfi.dwFontSize.Y = 16;
+    cfi.FontFamily = 54;
+    cfi.FontWeight = 400;
+#pragma warning(suppress : 4996)
+    wcscpy(cfi.FaceName, L"Consolas");
+    SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), 0, &cfi);
+
+    //
+    system("mode con cols=80 lines=25");
+
+    //    
+    std::cout << "lalalala";
+    Sleep(3000);
+    std::cout << "\r               \r";
+    Sleep(3000);
+
+    //
+    Escape-последовательность
+ESCAPE-ПОСЛЕДОВАТЕЛЬНОСТЬ
+Escape-последовательность	Представляет
+\a	Звонок (предупреждение)
+\b	Backspace
+\f	Перевод страницы
+\n	Новая строка
+\r	Возврат каретки
+\t	Горизонтальная табуляция
+\v	Вертикальная табуляция
+\'	Одиночная кавычка
+\"	Двойная кавычка
+\\	Обратная косая черта
+\?	Литерал вопросительного знака
+\\	Символ ASCII в восьмеричной нотации
+\xhh	Символ ASCII в шестнадцатеричной нотации
+\xhhhh	Символ юникода в шестнадцатеричном формате, если эта escape-последовательность используется в многобайтовой знаковой константе или строковом литерале юникода.
+
+Например, WCHAR f = L'\x4e00' или WCHAR b[] = L"The Chinese character for one is \x4e00".
+
+
+
+    char** arr = new char* [field_size * base_size];
+    for (int i = 0; i < field_size * base_size; i++)
+        arr[i] = new char[field_size * base_size];
+//free memory
+    for (int i = 0; i < field_size * base_size; i++)
+        delete[] arr[i];
+    delete[] arr;
+
+
+    for (int row = 0; row < cell_size * base_size; row++)
+    {
+        for (int col = 0; col < cell_size * base_size; col++)
+        {
+            if (row % cell_size)
+                if (col % cell_size)
+                    std::cout << field_type1;
+                else
+                    std::cout << field_type2;
+            else
+                if (col % cell_size)
+                    std::cout << field_type2;
+                else
+                    std::cout << field_type1;     
+        }
+        std::cout << std::endl;
+    }
