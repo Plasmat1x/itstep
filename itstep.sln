@@ -55,6 +55,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "h_w7.2", "h_w7.2\h_w7.2.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "coffee_shop", "coffee_shop\coffee_shop.vcxproj", "{C741D25D-F3EC-4B1A-AA25-24FFEFC8584B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "magic_number", "magic_number\magic_number.vcxproj", "{AD019CBE-D413-433E-BC1C-9A7B01516517}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -223,6 +225,14 @@ Global
 		{C741D25D-F3EC-4B1A-AA25-24FFEFC8584B}.Release|x64.Build.0 = Release|x64
 		{C741D25D-F3EC-4B1A-AA25-24FFEFC8584B}.Release|x86.ActiveCfg = Release|Win32
 		{C741D25D-F3EC-4B1A-AA25-24FFEFC8584B}.Release|x86.Build.0 = Release|Win32
+		{AD019CBE-D413-433E-BC1C-9A7B01516517}.Debug|x64.ActiveCfg = Debug|x64
+		{AD019CBE-D413-433E-BC1C-9A7B01516517}.Debug|x64.Build.0 = Debug|x64
+		{AD019CBE-D413-433E-BC1C-9A7B01516517}.Debug|x86.ActiveCfg = Debug|Win32
+		{AD019CBE-D413-433E-BC1C-9A7B01516517}.Debug|x86.Build.0 = Debug|Win32
+		{AD019CBE-D413-433E-BC1C-9A7B01516517}.Release|x64.ActiveCfg = Release|x64
+		{AD019CBE-D413-433E-BC1C-9A7B01516517}.Release|x64.Build.0 = Release|x64
+		{AD019CBE-D413-433E-BC1C-9A7B01516517}.Release|x86.ActiveCfg = Release|Win32
+		{AD019CBE-D413-433E-BC1C-9A7B01516517}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -105,3 +105,6 @@ Escape-последовательность	Представляет
         }
         std::cout << std::endl;
     }
+
+    //
+    srand(time(NULL));
