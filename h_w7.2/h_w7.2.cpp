@@ -9,6 +9,7 @@
 
 
 //------------------------------------------------------------------------//
+
 // 7 неделя
 void w7t1();
 void w7t2();
@@ -61,7 +62,7 @@ int main()
     //w6t2();
     //w6t3();
     //w6t4();
-    w6t5();
+    //w6t5();
 
 //------------------------------------------------------------------------//
     Sleep(2000); return EXIT_SUCCESS;
@@ -177,7 +178,6 @@ void w7t1()
 
     Sleep(3000);
 }
-
 void w7t2()
 {
 /* Написать программу, которая выводит на экран шахматную
@@ -271,7 +271,6 @@ void w7t2()
     bufferSize = { 80, 9000 };
     SetConsoleScreenBufferSize(hWnd, bufferSize);
 }
-
 void w7t3()
 {
     /*
@@ -301,7 +300,6 @@ void w7t3()
 
     Sleep(1500);
 }
-
 void w7t4()
 {
     /*
@@ -360,7 +358,6 @@ void w7t4()
 
     Sleep(1500);
 }
-
 void w7l1(int* arr, int size)
 {
     /*
@@ -390,7 +387,6 @@ void w7l1(int* arr, int size)
 
     Sleep(1500);
 }
-
 void w7l2(int* arr, int size)
 {
     /*
@@ -418,7 +414,6 @@ void w7l2(int* arr, int size)
 
     Sleep(1500);
 }
-
 bool prim(int n) 
 {
     for (int d = 2; d <= n / 2; d++)
@@ -426,7 +421,6 @@ bool prim(int n)
             return false;
     return true;
 }
-
 void w7l3(int* arr, int size)
 {
     /*
@@ -528,7 +522,6 @@ a вводится с клавиатуры: 1 <=a <= 20).
 
     Sleep(1500);
 }
-
 void w6t5()
 {
     /*
