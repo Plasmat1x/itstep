@@ -2,7 +2,6 @@
 #include <Windows.h>
 #include <stdlib.h>
 #include <time.h>
-#include <algorithm>
 
 void w8t1();
 void w8t2();
