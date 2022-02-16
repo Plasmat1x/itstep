@@ -16,11 +16,11 @@
 - *[income_calc](http://github.com/Plasmat1x/itstep/tree/master/income_calc)*: приложение расчета дохода в зависимости от выполненой работы и прогулов
 - *[Clock2.0](http://github.com/Plasmat1x/itstep/tree/master/Clock2.0)*: Clock с многопоточностю (eng версия интерфейса)
 - *[multithreading](http://github.com/Plasmat1x/itstep/tree/master/multithreading)*: реализация многопоточности
-
+- *[coffe_shop](http://github.com/Plasmat1x/itstep/tree/master/coffee_shop)*: реализация логики корзины покупателя
+- *[magic_number](http://github.com/Plasmat1x/itstep/tree/master/magic_number)*: угадай число
+- *[w8](http://github.com/Plasmat1x/itstep/tree/master/w8)*: отгада число, кубики, круговые сдвиги массива (рекурсия)  
 ## Roadmap
 1. Разделить на отедьные проекты по неделям, из домашних и лабораторных.
-2. ~~Вывести интересные задачи  из домашних заданий в отдельные проекты~~.
-3. Доделать Clock. Добавить еще алгоритмов сортировки, ~~исправить имеющиеся~~, добавить многопоточность.
 
 #### Примечание
 - некоторые функции называются **h_w4_t4()** и **l_w3_t1()**
