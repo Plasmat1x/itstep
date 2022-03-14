@@ -130,3 +130,12 @@ i + j > N — 1 — область под
 побочной диагональю;
 i + j < N – 1 — область над
 побочной диагональю;
+
+/* ************************************************************
+    Counting sheep version 1.0
+    Author: Ronald Sleepyhead, 2012
+    email: rs@insomnia.org
+
+    Changes:
+    2012-09-13: Ginny Drowsy: counting black sheep improved
+ ************************************************************ */ 

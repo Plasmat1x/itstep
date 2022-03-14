@@ -120,7 +120,7 @@ int main()
     bool is_game = false;
     int cash = 0;
     int bet = 0;
-    int dice_game_size = 2;
+    int dice_game_size = 5;
     int player_sum = 0;
     int ai_sum = 0;
     std::vector<int> player_dices;
