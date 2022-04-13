@@ -604,7 +604,7 @@ void merge_sort(int* arr, int l, int r)
 
     merge_sort(arr, l, m);
     merge_sort(arr, m + 1, r);
-
+        
     int* buf = new int[buf_size];
     int xl = l;
     int xr = m + 1;
