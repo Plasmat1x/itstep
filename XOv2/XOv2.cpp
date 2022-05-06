@@ -24,7 +24,7 @@ void field_nullify(char** arr, size_t size);
 void freemem(char** arr, size_t size);
 char** allocnew(size_t size);
 void pl_move(coord vec, char glyph, char** arr, size_t size);
-void ai_move(int count, char glyph, char** arr, size_t size);
+void ai_move(int count, int nfw, char glyph, char op_glyph, int hard_mode, char** arr, size_t size);
 void check(bool& is_game, char glyph, int number_for_win, int& count, char** arr, size_t size);
 
 int main()
@@ -44,6 +44,7 @@ int main()
 
     int number_for_win = 3;
     int count = 0;
+    int hard_mode = 0;
 
     //------------------------------//
     field = allocnew(size);
@@ -90,8 +91,9 @@ Menu:
                 << "1. field size = " << size << "\n"
                 << "2. player glyph = " << pl << "\n"
                 << "3. ai glyph = " << ai << "\n"
-                << "4. number glyphs in row for win = " <<  number_for_win << "\n"
-                << "5. game type (0 single, 1 multi) = " <<  multiplayer << "\n"
+                << "4. number glyphs in row for win = " << number_for_win << "\n"
+                << "5. game type (0 single, 1 multi) = " << multiplayer << "\n"
+                << "6. ai mode = " << hard_mode << "\n"
                 << "\nx. Exit from options\n\n"
                 << "\nenter number of option for change them: ";
             std::cin >> input;
@@ -104,6 +106,8 @@ Menu:
                 std::cout << "enter value of parameter size: ";
                 std::cin >> size;
                 field = allocnew(size);
+                if (number_for_win > size)
+                    number_for_win = size;
             }
             break;
 
@@ -126,12 +130,20 @@ Menu:
                 std::cin >> nfw;
                 if (nfw <= size)
                     number_for_win = nfw;
+                else
+                    number_for_win = size;
             }
             break;
             case '5':
             {
                 std::cout << "enter game type (ai 0, second player 1): ";
                 std::cin >> multiplayer;
+            }
+            break;
+            case '6':
+            {
+                std::cout << "enter ai mode: ";
+                std::cin >> hard_mode;
             }
             break;
             case 'x':
@@ -154,7 +166,7 @@ Menu:
             {
                 while (pl_turn == true)
                 {
-                    std::cout << pl << "> enter coords (x,y): ";
+                    std::cout << pl << " > enter coords (x,y): ";
                     std::cin >> move.x >> move.y;
                     
                     if (move.x <= size && move.x >= 1 && move.y <= size && move.y >= 1)
@@ -180,7 +192,7 @@ Menu:
             {
                 while (pl_turn == false)
                 {
-                    std::cout << ai << "> enter coords (x,y): ";
+                    std::cout << ai << " > enter coords (x,y): ";
                     std::cin >> move.x >> move.y;
                     if (move.x <= size && move.x >= 1 && move.y <= size && move.y >= 1)
                     {
@@ -205,12 +217,12 @@ Menu:
             {
                 while (pl_turn == false)
                 {
-                    //ai_move(count, ai, field, size);
+                    ai_move(count, number_for_win, ai, pl, hard_mode, field, size);
                     pl_turn = !pl_turn;
                     count++;
                     field_draw(field, size);
                     check(is_game, ai, number_for_win, count, field, size);
-                    //Sleep(1000);
+                    Sleep(1000);
                 }
             }    
         }    
@@ -282,21 +294,45 @@ void pl_move(coord vec, char glyph, char** arr, size_t size)
     }
 }
 
-/*
-Реализация ИИ бесполезна пока комбинации считываются не правильно
-*/
-void ai_move(int count, char glyph, char** arr, size_t size)
+void ai_move(int count, int nfw, char glyph, char op_glyph, int hard_mode, char** arr, size_t size)
 {
     /*
     Доделать ИИ
     */
-    int i = 0, j = 0;
-    do
+    switch (hard_mode)
     {
-        i = rand() % size;
-        j = rand() % size;		
-    } while (arr[i][j] != ' ');
-    arr[i][j] = glyph;
+    case 0:
+    {
+        int i = 0, j = 0;
+        do
+        {
+            i = rand() % size;
+            j = rand() % size;
+        } while (arr[i][j] != ' ');
+        arr[i][j] = glyph;
+    }
+    break;
+    case 1:
+    {
+        int i = 0; int j = 0;
+        if (count == 1)
+        {
+            {
+                i = rand() % size;
+                j = rand() % size;
+            } while (arr[i][j] != ' ');
+            arr[i][j] = glyph;
+        }
+
+        if ((count % nfw - 1) == 0)
+        {
+
+        }
+    }
+    break;
+    default:
+        break;
+    }
 }
 
 /*
@@ -310,187 +346,109 @@ O| |X|
  | |O|
 */
 void check(bool& is_game, char glyph, int number_for_win, int& count, char** arr, size_t size)
-{
-    //после добавления ИИ(рандомного) сломалось
-    /*
-    Проблемные комбинации
-        
-       |X|
-      X|X|      - vertical win
-      X| |
-
-       | |
-       |X|X     - horizontal win
-       | |X
-
-       | |
-       |X|      - horizontal win
-       |X|X
-
-       |X|X
-       |X|      - horizontal win
-       | |
-
-       | | 
-       |X|X     - horizontal win
-      X| |
-
-      X| | 
-       |X|X     - horizontal win
-       | |
-
-       |X|
-       |X|X     - horizontal win
-       | |
-
-       | |
-       |X|X     - horizontal win
-       |X|
-
-       | |
-      X|X|      - main diagonal win
-       |X|
-
-    */
-     
-    //проверка по строкам
-    int wincounter = 0;
-    if (count == size * size)
-    {
-        std::cout << "draw \n";
-        system("pause");
-        is_game = false;
-        return;
-    }
+{   
     if (count >= number_for_win * 2 - 1)
     {
-        wincounter = 0;
-        for (size_t i = 0; i < size; i++)
+        int hwc = 0;
+        int vwc = 0;
+        int dwc = 0;
+        int swc = 0;
+
+        for (size_t i = 0; i < size; i++) // row
         {
-            wincounter = 0;
-            for (size_t j = 0; j < size;j++)
+            for (size_t j = 0; j < size;j++) // col 
             {
-                for (size_t w = 0; w < number_for_win; w++)
+                hwc = 0;
+                vwc = 0;
+                dwc = 0;
+                swc = 0;
+
+                for (size_t w = 0; w < number_for_win; w++) // check combination
                 {
-                    if ((j + w) < size)
+                    if ((j + number_for_win) <= size) // horizontal chek
                     {
-                        if (arr[i][j] != ' ' && arr[i][j+w] == glyph && arr[i][j] == arr[i][j + w])
+                        if (arr[i][j] != ' ' && arr[i][j + w] == glyph && arr[i][j] == arr[i][j + w])
                         {
-                            wincounter++;
+                            hwc++;
                         }
                         else
                         {
-                            wincounter = 0;
-                            break;
+                            hwc = 0;
                         }
                     }
+                    else
+                        hwc = 0;
+
+                    if ((i + number_for_win) <= size) // vertical check 
+                    {
+                        if (arr[i][j] != ' ' && arr[i + w][j] == glyph && arr[i][j] == arr[i + w][j])
+                        {
+                            vwc++;
+                        }
+                        else
+                        {
+                            vwc = 0;
+                        }
+                    }
+                    else
+                        vwc = 0;
+
+                    if ((i + number_for_win) <= size && (j + number_for_win) <= size) // diagonal chek
+                    {
+                        if (arr[i][j] != ' ' && arr[i + w][j + w] == glyph && arr[i][j] == arr[i + w][j + w])
+                        {
+                            dwc++;
+                        }
+                        else
+                        {
+                            dwc = 0;
+                        }
+                    }
+                    else
+                        dwc = 0;
+
+                    if ((i + number_for_win) <= size && (j - number_for_win) >= 0) //side diagonal check
+                    {
+                        if (arr[i][j] != ' ' && arr[i + w][j - w] == glyph && arr[i][j] == arr[i + w][j - w])
+                        {
+                            swc++;
+                        }
+                        else
+                        {
+                            swc = 0;
+                        }
+                    }
+                    else
+                        swc = 0;
                 }
-                if (wincounter == number_for_win)
+
+                if (hwc == number_for_win || vwc == number_for_win || dwc == number_for_win || swc == number_for_win)
                 {
                     std::cout << glyph << " winner";
-                    std::cout << " horizontal\n";
+
+                    if(hwc)
+                        std::cout << " horizontal\n";
+                    else if(vwc)
+                        std::cout << " vertical\n";
+                    else if (dwc)
+                        std::cout << " diagonal\n";
+                    else if (swc)
+                        std::cout << " side-diagonal\n";
+
                     system("pause");
                     is_game = false;
                     return;
                 }
             }
         }
-        //проверка по столбцам;
-        wincounter = 0;
-        for (size_t i = 0; i < size; i++)
-        {
-            wincounter = 0;
-            for (size_t j = 0; j < size; j++)
-            {
-                for (size_t w = 0; w < number_for_win; w++)
-                {
-                    if ((i + w) < size)
-                    {
-                        if (arr[i][j] != ' ' && arr[i+w][j] == glyph && arr[i][j] == arr[i + w][j])
-                        {
-                            wincounter++;
-                        }
-                        else
-                        {
-                            wincounter = 0;
-                            break;
-                        }
-                    }
-                    if (wincounter == number_for_win)
-                    {
-                        std::cout << glyph << " winner";
-                        std::cout << " vertical\n";
-                        system("pause");
-                        is_game = false;
-                        return;
-                    }
-                }
-            }
-        }
-        //проверка по соновной диагонали
-        wincounter = 0;
-        for (size_t i = 0; i < size; i++)
-        {
-            wincounter = 0;
-            for (size_t j = 0; j < size; j++)
-            {
-                for (size_t w = 0; w < number_for_win; w++)
-                {
-                    if ((i + w) < size && (j + w) < size)
-                    {
-                        if (arr[i][j] != ' ' && arr[i+w][j+w] == glyph && arr[i][j] == arr[i + w][j + w])
-                        {
-                            wincounter++;
-                        }
-                        else
-                        {
-                            wincounter = 0;
-                            break;
-                        }
-                    }
-                    if (wincounter == number_for_win)
-                    {
-                        std::cout << glyph << " winner";
-                        std::cout << " main diagonal\n";
-                        system("pause");
-                        is_game = false;
-                        return;
-                    }
-                }
-            }
-        }
-        //проверка по побочной диагонали
-        wincounter = 0;
-        for (size_t i = 0; i < size; i++)
-        {
-            wincounter = 0;
-            for (size_t j = 0; j < size; j++)
-            {
-                for (size_t w = 0; w < number_for_win; w++)
-                {
-                    if ((i + w) < size && (j - w) >= 0)
-                    {
-                        if (arr[i][j] != ' ' && arr[i+w][j-w] == glyph && arr[i][j] == arr[i + w][j - w])
-                        {
-                            wincounter++;
-                        }
-                        else
-                        {
-                            wincounter = 0;
-                            break;
-                        }
-                    }
-                    if (wincounter == number_for_win)
-                    {
-                        std::cout << glyph << " winner";
-                        std::cout << " side diagonal\n";
-                        system("pause");
-                        is_game = false;
-                        return;
-                    }
-                }
-            }
-        }
+    }
+
+    if (count >= size * size)
+    {
+        std::cout << "draw \n";
+        system("pause");
+        is_game = false;
+        return;
     }
 }
 

@@ -1,9 +1,9 @@
-// Algorithm.cpp : This file contains the 'main' function. Program execution begins and ends there.
-// Sorting algorithms 
+// Sorting algorithms + searching algorithms 
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
 
+//sorting func
 template<typename T>
 bool ascending(T a, T b);
 
@@ -37,6 +37,11 @@ V*/
 template<typename T>
 void shake_sort(T arr[], unsigned int size, bool (*comparsionFcn)(T, T));
 
+//search func
+template<typename T>
+unsigned int binary_search(T arr[], unsigned int size, T srch, bool (*comparsionFcn)(T, T));
+
+//-------------------------------------------------------------------------//
 int main()
 {
     //---init---
@@ -52,8 +57,7 @@ int main()
     for (int i = 0; i < size; i++)
     {
         iarr[i] = rand() % (100 - (-99)) - 99; //int
-        farr[i] = (rand() % (100 - (-99)) - 99) + ((rand() % (100 - (-99)) - 99) * 0.01f); //float
-        
+        farr[i] = (rand() % (100 - (-99)) - 99) + ((rand() % (100 - (-99)) - 99) * 0.01f); //float    
     }
 
     //---pre-render---
@@ -73,26 +77,21 @@ int main()
 )";
     std::cin >> type;
 
+//select_sort(arr, size, ascending);
+//bubble_sort(arr, size, ascending);
+//insert_sort(arr, size, ascending);
+//quick_sort(arr, size, ascending);
+//shell_sort(arr, size, ascending);
+//shake_sort(iarr, size, ascending);
+//shake_sort(farr, size, ascending);
+
     if (type == '<')
     {
-        //select_sort(arr, size, ascending);
-        //bubble_sort(arr, size, ascending);
-        //insert_sort(arr, size, ascending);
-        //quick_sort(arr, size, ascending);
-        //shell_sort(arr, size, ascending);
-        shake_sort(iarr, size, ascending);
-        shake_sort(farr, size, ascending);
-        
+        quick_sort(iarr, size, ascending);
     }
     else if (type == '>')
     {
-        //select_sort(arr, size, descending);
-        //bubble_sort(arr, size, descending);
-        //insert_sort(arr, size, descending);
-        //quick_sort(arr, size, descending);
-        //shell_sort(arr, size, descending);
-        shake_sort(iarr, size, descending);
-        shake_sort(farr, size, descending);
+        quick_sort(iarr, size, descending);
     }
     
     //---render---
@@ -104,9 +103,14 @@ int main()
         std::cout << "array[" << i << "] = " << farr[i] << ";\n";
     std::cout << std::endl;
 
+    int srch = 0;
+    std::cin >> srch;
+    std::cout << binary_search(iarr, srch, 15, ascending) << std::endl;
+
     return 0;
 }
 
+//-------------------------------------------------------------------------------------//
 template<typename T>
 bool ascending(T a, T b)
 {
@@ -285,13 +289,54 @@ void shake_sort(T arr[], unsigned int size, bool (*comparsionFcn)(T, T))
     }
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+//---------------------------------------------------------------------------------------//
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+template<typename T>
+unsigned int binary_search(T arr[], unsigned int size, T srch, bool (*comparsionFcn)(T, T))
+{
+    unsigned int p = 0;
+    unsigned int l = 0;
+    unsigned int r = size;
+
+    while (true)
+    {
+        p = (l + r) / 2;
+
+        /*
+        if (comparsionFcn(srch, arr[p]))
+        {
+            r = p - 1;
+        }
+        else if(comparsionFcn(arr[p], srch))
+        {
+            l = p + 1;
+        }
+        else
+        {
+            return p;
+        }
+        if (l > r)
+        {
+            return 0;
+        }
+        */
+
+        if (srch < arr[p])
+        {
+            r = p - 1;
+        }
+        else if (srch > arr[p])
+        {
+            l = p + 1;
+        }
+        else
+        {
+            return p;
+        }
+        if (l > r)
+        {
+            return 0;
+        }
+    }
+    return 0;
+}
