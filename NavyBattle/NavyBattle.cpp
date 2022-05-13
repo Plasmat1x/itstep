@@ -92,6 +92,9 @@ int main()
             efield[i][j] = { 0,0 };
         }
 
+    //DELETE FOR RELEASE
+    mfield[1][1].val = 1;
+
 // while(menu) // possible variation for replay
     DRAW;
 
@@ -100,6 +103,7 @@ int main()
     {
         for (int i = 0; i < 10; i++)// player deploy
         {
+            break; //DELETE FOR RELEASE
             DRAW;
             char cx, co;
             int x, y;
@@ -141,9 +145,9 @@ int main()
 
             do
             {
-                x = rand() % 9 + 1;
-                y = rand() % 9 + 1;
-                o = (bool)(rand() % 1);
+                x = rand() % 10 + 1;
+                y = rand() % 10 + 1;
+                o = (bool)(rand() % 2);
 
                 if (i == 0 && available(x, y, o, 4, efield)) break;
                 else if ((i >= 1 && i <= 2) && available(x, y, o, 3, efield)) break;
