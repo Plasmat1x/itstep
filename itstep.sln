@@ -135,6 +135,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sapper", "Sapper\Sapper.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ptrptr", "ptrptr\ptrptr.vcxproj", "{8AD24592-B9E3-4023-8312-FBD02F977619}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "triarr", "triarr\triarr.vcxproj", "{98985438-DEE9-45C4-A3B2-CCE124C1F881}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -615,6 +617,14 @@ Global
 		{8AD24592-B9E3-4023-8312-FBD02F977619}.Release|x64.Build.0 = Release|x64
 		{8AD24592-B9E3-4023-8312-FBD02F977619}.Release|x86.ActiveCfg = Release|Win32
 		{8AD24592-B9E3-4023-8312-FBD02F977619}.Release|x86.Build.0 = Release|Win32
+		{98985438-DEE9-45C4-A3B2-CCE124C1F881}.Debug|x64.ActiveCfg = Debug|x64
+		{98985438-DEE9-45C4-A3B2-CCE124C1F881}.Debug|x64.Build.0 = Debug|x64
+		{98985438-DEE9-45C4-A3B2-CCE124C1F881}.Debug|x86.ActiveCfg = Debug|Win32
+		{98985438-DEE9-45C4-A3B2-CCE124C1F881}.Debug|x86.Build.0 = Debug|Win32
+		{98985438-DEE9-45C4-A3B2-CCE124C1F881}.Release|x64.ActiveCfg = Release|x64
+		{98985438-DEE9-45C4-A3B2-CCE124C1F881}.Release|x64.Build.0 = Release|x64
+		{98985438-DEE9-45C4-A3B2-CCE124C1F881}.Release|x86.ActiveCfg = Release|Win32
+		{98985438-DEE9-45C4-A3B2-CCE124C1F881}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

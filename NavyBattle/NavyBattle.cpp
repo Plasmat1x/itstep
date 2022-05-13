@@ -39,7 +39,7 @@ Rules:
 
 #define DRAW draw(mfield, efield)
 
-struct cell
+struct cell 
 {
     int val;
     bool hit;
@@ -93,7 +93,39 @@ int main()
         }
 
     //DELETE FOR RELEASE
-    mfield[1][1].val = 1;
+    {
+        //test deplyment my field
+        //type 4
+        mfield[2][2].val = 4;
+        mfield[2][3].val = 4;
+        mfield[2][4].val = 4;
+        mfield[2][5].val = 4;
+        //type 3
+        mfield[2][7].val = 3;
+        mfield[3][7].val = 3;
+        mfield[4][7].val = 3;
+        //type 3
+        mfield[2][9].val = 3;
+        mfield[3][9].val = 3;
+        mfield[4][9].val = 3;
+        //type 2
+        mfield[6][8].val = 2;
+        mfield[7][8].val = 2;
+        //type 2
+        mfield[7][5].val = 2;
+        mfield[7][6].val = 2;
+        //type 2
+        mfield[8][3].val = 2;
+        mfield[9][3].val = 2;
+        //type 1
+        mfield[4][2].val = 1;
+        //type 1
+        mfield[4][4].val = 1;
+        //type 1
+        mfield[6][2].val = 1;
+        //type 1
+        mfield[9][8].val = 1;
+    }
 
 // while(menu) // possible variation for replay
     DRAW;
