@@ -54,6 +54,7 @@ void opensafe(int x, int y);
 
 cell** arr = nullptr;
 int count_mine = 0;
+int count_turns = 0;
 
 int main()
 {
@@ -126,14 +127,16 @@ int main()
 void draw()
 {
     system("cls");
-    std::cout << "--Sapper game--\n\n";
-    std::cout << "   1 2 3 4 5 6 7 8 9 10\n";
+    std::cout << "\t\t--Sapper game--\n\n"
+    << "Количество мин: " << count_mine << "\tколичество ходов: " << count_turns <<"\n\n" 
+    << "    1 2 3 4 5 6 7 8 9 10\n\n";
+
     for (int i = 1; i < 11; i++)
     {
         if (i < 10)
-            std::cout << " " << i;
+            std::cout << " " << i << " ";
         else
-            std::cout << i;
+            std::cout << i << " ";
         for (int j = 1; j < 11; j++)
         {
             if (arr[i][j].hide == false)
@@ -154,6 +157,8 @@ void draw()
         std::cout << "\n";
     }
     std::cout << std::endl;
+
+    count_turns++;
 }
 
 void generate()
