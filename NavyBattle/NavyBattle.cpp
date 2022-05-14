@@ -52,17 +52,17 @@ struct cell
 };
 
 
-void draw(cell** mfield, cell** efield);
+void draw(cell** const mfield, cell** const efield);
 
-int chartoint(char x);
+int chartoint(const char& x);
 
-void hit(int x, int y, cell** target);
+void hit(const int& x, const int& y, cell** target);
 
-void deployment(int x, int y, bool o, int type, cell** field);
+bool available(const int& x, const int& y, const bool& o, const int& type, cell** const field);
 
-bool available(int x, int y, bool o, int type, cell** field);
+void deployment(const int& x, const int& y, const bool& o, const int& type, cell** field);
 
-//win chek required
+bool check(cell** const field);
 
 int main()
 {
@@ -84,7 +84,7 @@ int main()
         efield[i] = new cell[12];
     }
 
-// fields clear
+    //fields clear
     for(int i = 0; i < 12; i++)
         for (int j = 0; j < 12; j++)
         {
@@ -92,6 +92,7 @@ int main()
             efield[i][j] = { 0,0 };
         }
 
+    /*
     //DELETE FOR RELEASE
     {
         //test deplyment my field
@@ -125,35 +126,52 @@ int main()
         mfield[6][2].val = 1;
         //type 1
         mfield[9][8].val = 1;
+
+
+        //efield win check
+
+        efield[1][1].val = 1;
+        efield[10][10].val = 1;
     }
+    //*/
 
 // while(menu) // possible variation for replay
     DRAW;
-
+    system("pause");
     //========================================================
     while (is_preporation)  // deployment ship loop
     {
+        //break; //DELETE FOR RELEASE
+        //========================================================
         for (int i = 0; i < 10; i++)// player deploy
         {
-            break; //DELETE FOR RELEASE
             DRAW;
+            std::cout << "--Расстановка--" << std::endl;
             char cx, co;
             int x, y;
             bool o;
 
             do 
             {
-                std::cout << "-Расстановка кораблей-\nВведите координаты (А 1): ";
+                std::cout << "Введите координаты (А 1): ";
                 std::cin >> cx >> y;
                 x = chartoint(cx);
-                std::cout << "расположение (В_ертикально/Г_оризонтально): ";
-                std::cin >> co;
 
-                if (co == 'г' || co == 'Г')
+                if (i >= 6 && i <= 10)
+                {
                     o = true;
+                }
                 else
-                    o = false;
+                {
+                    std::cout << "расположение (В_ертикально/Г_оризонтально): ";
+                    std::cin >> co;
 
+                    //horizontal true; vertical false
+                    if (co == 'г' || co == 'Г')
+                        o = true;
+                    else
+                        o = false;
+                }
 
                 if (i == 0 && available(x, y, o, 4, mfield)) break;
                 else if ((i >= 1 && i <= 2) && available(x, y, o, 3, mfield)) break;
@@ -168,7 +186,9 @@ int main()
             else if(i >= 3 && i <= 5) deployment(x, y, o, 2, mfield);
             else if(i >= 6 && i <= 10) deployment(x, y, o, 1, mfield);
         }
+        //========================================================
 
+        //========================================================
         for (int i = 0; i < 10; i++) // ai deploy
         {
             DRAW;
@@ -193,6 +213,8 @@ int main()
             else if (i >= 3 && i <= 5) deployment(x, y, o, 2, efield);
             else if (i >= 6 && i <= 10) deployment(x, y, o, 1, efield);
         }
+        //========================================================
+        
         DRAW;
         is_preporation = false;
     }
@@ -203,6 +225,7 @@ int main()
     while (is_game) // game loop
     {
         DRAW;
+        std::cout << "--Игра--" << std::endl;
 
         char cx = 0;
         int x = 0, y = 0;
@@ -210,7 +233,10 @@ int main()
         //====================================================
         do // player turn
         {
+            if (!is_game) break;
+
             DRAW;
+            std::cout << "--Игра ваш ход--" << std::endl;
             do // check right coordinates
             {
                 std::cout << "Введите координаты атаки (A 1): ";
@@ -238,13 +264,24 @@ int main()
                 turn = false;
             }
             
-            Sleep(2000);
+            if (check(efield))
+            {
+                is_game = false;
+                std::cout << "\nКОНЕЦ. Мы уничтожили вражеский флот!" << std::endl;
+                Sleep(5000);
+                break;
+            }
+
+            Sleep(3000);
         } while (turn);
         //====================================================
 
         do // AI turn
         {
+            if (!is_game) break;
+
             DRAW;
+            std::cout << "--Игра ход врага--" << std::endl;
             do // check right coordinates
             {
                 x = rand() % 10 + 1;
@@ -266,11 +303,19 @@ int main()
                 turn = true;
             }
 
-            Sleep(2000);
+            if (check(mfield))
+            {
+                is_game = false;
+                std::cout << "\nКОНЕЦ. Враг уничтожил наш флот!" << std::endl;
+                Sleep(5000);
+                break;
+            }
+
+            Sleep(3000);
         } while (!turn);
 
         //====================================================
-        Sleep(2000);
+        DRAW;
     }
 
     //clear mem
@@ -287,11 +332,10 @@ int main()
     return 0;
 }
 
-//test enable comment uncomment requaired for release
-void draw(cell** mfield, cell** efield)
+void draw(cell** const mfield, cell** const efield)
 {
     system("cls");
-    std::cout << "--Navy Battle--\n" << std::endl;
+    std::cout << "\t\t\t--Navy Battle--\n" << std::endl;
 
     std::cout << "   а б в г д е ж з и к \t\t";
     std::cout << "   а б в г д е ж з и к \n";
@@ -330,42 +374,45 @@ void draw(cell** mfield, cell** efield)
             }
         }
 
-        //TEST DRAW
-        std::cout << "\t\t" << i << " ";
-        for (int j = 1; j < 11; j++) //efield draw
+        //DELETE FOR RELEASE
+        //test draw for efield
+        /*
         {
-            if (efield[i][j].hit == false && efield[i][j].val > 0)
+            std::cout << "\t\t" << i << " ";
+            for (int j = 1; j < 11; j++) //efield draw
             {
-                if (i == 10 && j == 1)
-                    std::cout << efield[i][j].val;
-                else
-                    std::cout << " " << efield[i][j].val;
-            }
-            else if (efield[i][j].hit == false && efield[i][j].val == 0)
-            {
-                if (i == 10 && j == 1)
-                    std::cout << "~";
-                else
-                    std::cout << " ~";
-            }
-            else if (efield[i][j].hit == true && efield[i][j].val > 0)
-            {
-                if (i == 10 && j == 1)
-                    std::cout << "X";
-                else
-                    std::cout << " X";
-            }
-            else if (efield[i][j].hit == true && efield[i][j].val == 0)
-            {
-                if (i == 10 && j == 1)
-                    std::cout << " ";
-                else
-                    std::cout << "  ";
+                if (efield[i][j].hit == false && efield[i][j].val > 0)
+                {
+                    if (i == 10 && j == 1)
+                        std::cout << efield[i][j].val;
+                    else
+                        std::cout << " " << efield[i][j].val;
+                }
+                else if (efield[i][j].hit == false && efield[i][j].val == 0)
+                {
+                    if (i == 10 && j == 1)
+                        std::cout << "~";
+                    else
+                        std::cout << " ~";
+                }
+                else if (efield[i][j].hit == true && efield[i][j].val > 0)
+                {
+                    if (i == 10 && j == 1)
+                        std::cout << "X";
+                    else
+                        std::cout << " X";
+                }
+                else if (efield[i][j].hit == true && efield[i][j].val == 0)
+                {
+                    if (i == 10 && j == 1)
+                        std::cout << " ";
+                    else
+                        std::cout << "  ";
+                }
             }
         }
+        */       
 
-
-        /*release draw
         std::cout << "\t\t" << i << " ";
         for (int j = 1; j < 11; j++) //efield draw
         {
@@ -391,13 +438,12 @@ void draw(cell** mfield, cell** efield)
                     std::cout << "  ";
             }
         }
-        */
         std::cout << "\n";
     }
     std::cout << "\n" << std::endl;
 }
 
-int chartoint(char x)
+int chartoint(const char& x)
 {
     int i = -1;
     switch (x)
@@ -477,17 +523,24 @@ int chartoint(char x)
     return i;
 }
 
-void hit(int x, int y, cell** target)
+void hit(const int& x, const int& y, cell** target)
 {
     target[y][x].hit = true;
 }
 
-bool available(int x, int y, bool o, int type, cell** field)
+bool available(const int& x, const int& y, const bool& o, const int& type, cell** const field)
 {
-    if (x + type > 10) return false;
-    if (y + type > 10) return false;
     if (field[y][x].val > 0) return false;
 
+    if (o)
+    {
+        if (x + type > 10) return false;
+    }
+    else
+    {
+        if (y + type > 10) return false;
+    }    
+    
     if (type == 1)
     {
         if (
@@ -572,7 +625,7 @@ bool available(int x, int y, bool o, int type, cell** field)
     return true;
 }
 
-void deployment(int x, int y, bool o, int type, cell** field)
+void deployment(const int& x, const int& y, const bool& o, const int& type, cell** field)
 {
     for (int i = 0; i < type; i++) //empleace 
     {
@@ -581,4 +634,20 @@ void deployment(int x, int y, bool o, int type, cell** field)
         else   //vertical
             field[y + i][x].val = type;
     }
+}
+
+bool check(cell** const field)
+{
+    for (int i = 1; i <= 10; i++)
+    {
+        for (int j = 1; j <= 10; j++)
+        {
+            if (field[i][j].val > 0 && field[i][j].hit == false)
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
 }
