@@ -98,6 +98,7 @@ int main()
             }
 
             draw();
+            count_turns--;
             int v = rand() % 5;
             is_game = false;
             std::cout << "ÊÎÍÅÖ. ";
