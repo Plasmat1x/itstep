@@ -83,7 +83,11 @@ int main()
             std::cin >> x >> y;
         } while ((x < 1 || x > 10) || (y < 1 || y > 10));
 
-        opensafe(x, y);
+        if (arr[y][x].value == 0)
+        {
+            opensafe(x, y);
+        }
+
         arr[y][x].hide = false;
 
         if (check() == false)
@@ -202,16 +206,20 @@ void generate()
 
 bool check()
 {
+    int _counter = 10 * 10 - count_mine;
     int j = 0;
     for (int i = 1; i < 11; i++)
     {
         for (j = 1; j < 11; j++)
         {
             if (arr[i][j].value > 8 && arr[i][j].hide == false) return false;
+            if (arr[i][j].value < 9 && arr[i][j].hide == false) _counter--;
         }
 
         if (arr[i][j].value < 9 && arr[i][j].hide == false) continue;
     }
+
+    if (_counter == 0) return false;
 
     return true;
 }
@@ -236,6 +244,11 @@ void opensafe(int x, int y)
     opensafe(x + 1, y);
     opensafe(x, y - 1);
     opensafe(x, y + 1);
+
+    opensafe(x - 1, y - 1);
+    opensafe(x + 1, y + 1);
+    opensafe(x + 1, y - 1);
+    opensafe(x - 1, y + 1);
 }
 
 /* clear field
